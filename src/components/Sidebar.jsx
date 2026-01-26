@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,6 +17,10 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  useEffect(() => {
+  document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+}, [mobileOpen]);
+
 
   const logout = () => {
     setUser(null);
@@ -159,43 +163,48 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
 
       {/* ================= MOBILE SIDEBAR ================= */}
       <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ x: -300 }}
-            animate={{ x: 0 }}
-            exit={{ x: -300 }}
-            className="fixed inset-0 z-50 bg-black/40 md:hidden"
-          >
-            <motion.div
-              className="
-                absolute left-0 top-0 h-full w-64
-                bg-gradient-to-b from-blue-700 to-blue-800
-                dark:from-slate-950 dark:to-slate-900
-                text-white px-3 py-4 flex flex-col
-              "
-            >
-              <div className="flex justify-end mb-4">
-                <button onClick={() => setMobileOpen(false)}>
-                  <X />
-                </button>
-              </div>
+  {mobileOpen && (
+    <motion.div
+      className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-black/40 md:hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setMobileOpen(false)}
+    >
+      <motion.div
+        initial={{ x: -260 }}
+        animate={{ x: 0 }}
+        exit={{ x: -260 }}
+        transition={{ duration: 0.25 }}
+        onClick={(e) => e.stopPropagation()}
+        className="
+          fixed top-0 left-0 h-screen w-64
+          bg-gradient-to-b from-blue-700 to-blue-800
+          text-white px-3 py-4 flex flex-col
+        "
+      >
+        <div className="flex justify-end mb-4">
+          <X onClick={() => setMobileOpen(false)} />
+        </div>
 
-              <div className="space-y-1 text-sm flex-1">
-                {renderMenu()}
-              </div>
+        <div className="space-y-1 flex-1">
+          {renderMenu()}
+        </div>
 
-              <button
-                onClick={logout}
-                className="bg-red-500 hover:bg-red-600 py-2.5 rounded-xl text-sm font-semibold"
-              >
-                <LogOut size={18} /> Logout
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <button
+          onClick={logout}
+          className="bg-red-500 py-2.5 rounded-xl text-sm font-semibold"
+        >
+          Logout
+        </button>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </>
   );
 };
 
 export default Sidebar;
+

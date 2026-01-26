@@ -50,6 +50,7 @@ const Navbar = ({ user }) => {
   return (
     <div
       className="
+        hidden md:flex
         sticky top-0 z-50 h-16 w-full
         bg-white dark:bg-slate-950
         border-b border-gray-200 dark:border-slate-800

@@ -18,7 +18,7 @@ const DashboardLayout = ({ user, setUser, children }) => {
       {/* RIGHT SIDE */}
       <div
         className={`flex-1 flex flex-col transition-all duration-300
-          ${collapsed ? "ml-[80px]" : "ml-[260px]"}
+          ${collapsed ? "md:ml-[80px]" : "md:ml-[260px]"}
         `}
       >
         <Navbar user={user} />
