@@ -190,13 +190,17 @@ const AdminDashboard = ({ user, setUser }) => {
         hover:shadow-lg hover:-translate-y-0.5 transition
         text-sm font-semibold
         flex flex-col items-center gap-2
+        text-gray-800 dark:text-gray-100
       "
     >
-      <span className="text-3xl">{item.icon}</span>
+      <span className="text-3xl text-gray-700 dark:text-gray-200">
+        {item.icon}
+      </span>
       {item.label}
     </button>
   ))}
 </div>
+
       {/* PREMIUM STATS CARDS (LUCIDE – FINAL PREMIUM VERSION) */}
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
   {[
@@ -246,10 +250,10 @@ const AdminDashboard = ({ user, setUser }) => {
       >
         {/* LEFT */}
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="ttext-sm text-gray-600 dark:text-gray-200">
             {card.title}
           </p>
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mt-2">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mt-2">
             {card.value}
           </h2>
         </div>
@@ -290,7 +294,7 @@ const AdminDashboard = ({ user, setUser }) => {
       Overall Attendance
     </h3>
 
-    <div className="flex justify-between text-sm mb-2">
+    <div className="flex justify-between text-sm mb-2 text-gray-700 dark:text-gray-200">
       <span>{selectedDate === today ? "Today" : "Selected Date"}</span>
       <span>{attendance}%</span>
     </div>
@@ -302,18 +306,22 @@ const AdminDashboard = ({ user, setUser }) => {
       />
     </div>
 
-    <p className="text-xs text-gray-500 mt-2">
+    <p className="text-xs text-gray-500 dark:text-gray-300 mt-2">
       Attendance based on selected date
     </p>
   </div>
 
   {/* FEES */}
   <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-    <h3 className="font-semibold mb-3">Fees Status</h3>
+    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+      Fees Status
+    </h3>
 
-    <p className="text-sm text-gray-500">Collected: ₹12,00,000</p>
+    <p className="text-sm text-gray-600 dark:text-gray-300">
+      Collected: ₹12,00,000
+    </p>
 
-    <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+    <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3 mt-2">
       <div className="bg-yellow-500 h-3 rounded-full w-[80%]" />
     </div>
 
@@ -323,29 +331,30 @@ const AdminDashboard = ({ user, setUser }) => {
   </div>
 </div>
 
-      {/* RECENT ACTIVITIES */}
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-10">
-      <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
-        Recent Activities
-      </h3>
+{/* RECENT ACTIVITIES */}
+<div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-10">
+  <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
+    Recent Activities
+  </h3>
 
-      <ul className="space-y-3 text-sm">
-      {activities.map((item, i) => (
-        <li key={i} className="flex justify-between">
-          <span>{item.text}</span>
-          <span className="text-gray-400">{item.time}</span>
-        </li>
-      ))}
-    </ul>
-    </div>
+  <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
+    {activities.map((item, i) => (
+      <li key={i} className="flex justify-between">
+        <span>{item.text}</span>
+        <span className="text-gray-400 dark:text-gray-400">
+          {item.time}
+        </span>
+      </li>
+    ))}
+  </ul>
+</div>
 
-
-    {/* TODAY SUMMARY */}
+{/* TODAY SUMMARY */}
 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
 
   {/* PRESENT */}
   <div className="bg-white dark:bg-slate-900 border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-500 dark:text-gray-400">
+    <p className="text-sm text-gray-600 dark:text-gray-200">
       Students Present
     </p>
     <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
@@ -358,7 +367,7 @@ const AdminDashboard = ({ user, setUser }) => {
 
   {/* ABSENT */}
   <div className="bg-white dark:bg-slate-900 border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-500 dark:text-gray-400">
+    <p className="text-sm text-gray-600 dark:text-gray-200">
       Students Absent
     </p>
     <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
@@ -371,7 +380,7 @@ const AdminDashboard = ({ user, setUser }) => {
 
   {/* CIRCULARS */}
   <div className="bg-white dark:bg-slate-900 border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-500 dark:text-gray-400">
+    <p className="text-sm text-gray-600 dark:text-gray-200">
       Circulars Sent
     </p>
     <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
