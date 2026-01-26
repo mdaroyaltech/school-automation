@@ -1,5 +1,28 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
+import { motion } from "framer-motion";
+import {
+  GraduationCap,
+  Users,
+  BookOpen,
+  BarChart3,
+} from "lucide-react";
+
+const AnimatedBookIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    className="h-6 w-6 text-purple-600 dark:text-purple-300 animate-bounce"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+    <path d="M4 4.5A2.5 2.5 0 016.5 7H20v13H6.5A2.5 2.5 0 014 17.5z" />
+    <path d="M8 7h8" />
+  </svg>
+);
+
+
 
 const AdminDashboard = ({ user, setUser }) => {
   const today = new Date().toISOString().split("T")[0];
@@ -174,69 +197,89 @@ const AdminDashboard = ({ user, setUser }) => {
     </button>
   ))}
 </div>
-      {/* PREMIUM STATS CARDS */}
+      {/* PREMIUM STATS CARDS (LUCIDE – FINAL PREMIUM VERSION) */}
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
   {[
     {
       title: "Total Students",
       value: stats.students,
-      icon: "🎓",
+      icon: GraduationCap,
       bg: "bg-blue-100 dark:bg-blue-900/30",
+      iconColor: "text-blue-600 dark:text-blue-300",
     },
     {
       title: "Teachers",
       value: stats.teachers,
-      icon: "🧑",
+      icon: Users,
       bg: "bg-green-100 dark:bg-green-900/30",
+      iconColor: "text-green-600 dark:text-green-300",
     },
     {
       title: "Classes",
       value: stats.classes,
-      icon: "📚",
-bg: "bg-purple-100 dark:bg-purple-900/30",
-
+      icon: BookOpen, // fallback (SVG used instead)
+      bg: "bg-purple-100 dark:bg-purple-900/30",
+      iconColor: "text-purple-600 dark:text-purple-300",
     },
     {
       title: "Attendance",
       value: `${attendance}%`,
-      icon: "📊",
+      icon: BarChart3,
       bg: "bg-orange-100 dark:bg-orange-900/30",
+      iconColor: "text-orange-600 dark:text-orange-300",
     },
-  ].map((card) => (
-    <div
-      key={card.title}
-      className="
-        bg-white dark:bg-slate-800
-        p-6 rounded-2xl shadow
-        hover:shadow-lg transition
-        flex items-center justify-between
-      "
-    >
-      {/* LEFT */}
-      <div>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          {card.title}
-        </p>
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mt-2">
-          {card.value}
-        </h2>
-      </div>
+  ].map((card) => {
+    const Icon = card.icon;
 
-      {/* ICON */}
-      <div
-        className={`
-          ${card.bg}
-          h-12 w-12 rounded-xl
-          flex items-center justify-center
-          text-2xl
-        `}
+    return (
+      <motion.div
+        key={card.title}
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 300 }}
+        className="
+          bg-white dark:bg-slate-800
+          p-6 rounded-2xl shadow
+          hover:shadow-xl
+          transition-all duration-300
+          flex items-center justify-between
+        "
       >
-        {card.icon}
-      </div>
-    </div>
-  ))}
-</div>
+        {/* LEFT */}
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {card.title}
+          </p>
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mt-2">
+            {card.value}
+          </h2>
+        </div>
 
+        {/* ICON */}
+        {card.title === "Classes" ? (
+          <motion.div
+            whileHover={{ scale: 1.2, rotate: 6 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-purple-100 dark:bg-purple-900/30 h-12 w-12 rounded-xl flex items-center justify-center"
+          >
+            <AnimatedBookIcon />
+          </motion.div>
+        ) : (
+          <motion.div
+            whileHover={{ scale: 1.2, rotate: 6 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className={`
+              ${card.bg}
+              h-12 w-12 rounded-xl
+              flex items-center justify-center
+            `}
+          >
+            <Icon className={`h-6 w-6 ${card.iconColor}`} />
+          </motion.div>
+        )}
+      </motion.div>
+    );
+  })}
+</div>
 
 
       {/* GRID SECTION */}
