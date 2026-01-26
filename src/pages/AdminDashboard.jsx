@@ -341,34 +341,49 @@ const AdminDashboard = ({ user, setUser }) => {
 
 
     {/* TODAY SUMMARY */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-          <div className="bg-green-50 dark:bg-green-900 p-4 rounded-xl">
-            <p className="text-sm text-green-700 dark:text-green-300">
-              Students Present
-            </p>
-            <h2 className="text-2xl font-bold text-green-800 dark:text-green-200">
-              {summary.present}
-            </h2>
-          </div>
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
 
-          <div className="bg-red-50 dark:bg-red-900 p-4 rounded-xl">
-            <p className="text-sm text-red-700 dark:text-red-300">
-              Students Absent
-            </p>
-            <h2 className="text-2xl font-bold text-red-800 dark:text-red-200">
-              {summary.absent}
-            </h2>
-          </div>
+  {/* PRESENT */}
+  <div className="bg-white dark:bg-slate-900 border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+    <p className="text-sm text-gray-500 dark:text-gray-400">
+      Students Present
+    </p>
+    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+      {summary.present}
+    </h2>
+    <p className="text-xs text-green-600 mt-1">
+      Marked today
+    </p>
+  </div>
 
-          <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-xl">
-            <p className="text-sm text-blue-700 dark:text-blue-300">
-              Circulars Sent
-            </p>
-            <h2 className="text-2xl font-bold text-blue-800 dark:text-blue-200">
-              {summary.circulars}
-            </h2>
-          </div>
-        </div>
+  {/* ABSENT */}
+  <div className="bg-white dark:bg-slate-900 border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+    <p className="text-sm text-gray-500 dark:text-gray-400">
+      Students Absent
+    </p>
+    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+      {summary.absent}
+    </h2>
+    <p className="text-xs text-red-600 mt-1">
+      Not present
+    </p>
+  </div>
+
+  {/* CIRCULARS */}
+  <div className="bg-white dark:bg-slate-900 border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+    <p className="text-sm text-gray-500 dark:text-gray-400">
+      Circulars Sent
+    </p>
+    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+      {summary.circulars}
+    </h2>
+    <p className="text-xs text-blue-600 mt-1">
+      Today
+    </p>
+  </div>
+
+</div>
+
 
       {/* CLASS-WISE ATTENDANCE */}
       <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
