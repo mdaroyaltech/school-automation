@@ -37,16 +37,29 @@ const Sidebar = ({
 
   /* ================= MENU CONFIG ================= */
   const MENUS = {
-    Admin: [
-      { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
-      { icon: Users, label: "Attendance", path: "/attendance" },
-      { icon: IndianRupee, label: "Fees", path: "/fees" },
-      { icon: FileText, label: "Reports", path: "/reports" },
-      { icon: Bell, label: "Circulars", path: "/circular" },
-      { icon: Users, label: "Students", path: "/students" },
-      { icon: Settings, label: "Settings", path: "/settings" },
-    ],
-  };
+  Admin: [
+    { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
+    { icon: Users, label: "Attendance", path: "/attendance" },
+    { icon: IndianRupee, label: "Fees", path: "/fees" },
+    { icon: FileText, label: "Reports", path: "/reports" },
+    { icon: Bell, label: "Circulars", path: "/circular" },
+    { icon: Users, label: "Students", path: "/students" },
+    { icon: Settings, label: "Settings", path: "/settings" },
+  ],
+
+  Teacher: [
+    { icon: Users, label: "Attendance", path: "/attendance" },
+    { icon: FileText, label: "Reports", path: "/reports" },
+    { icon: Bell, label: "Circulars", path: "/circular" },
+  ],
+
+  Parent: [
+    { icon: LayoutDashboard, label: "Dashboard", path: "/parent" },
+    { icon: Bell, label: "Circulars", path: "/parent-circulars" },
+    { icon: FileText, label: "Report Card", path: "/reports" },
+    { icon: IndianRupee, label: "Fees", path: "/fees" },
+  ],
+};
 
   const roleKey = user?.role
     ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
