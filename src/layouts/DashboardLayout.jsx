@@ -1,31 +1,35 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 const DashboardLayout = ({ user, setUser, children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex bg-gray-100 dark:bg-slate-900">
-      {/* SIDEBAR */}
+    <div className="flex min-h-screen bg-gray-100 dark:bg-slate-900">
       <Sidebar
         user={user}
         setUser={setUser}
         collapsed={collapsed}
         setCollapsed={setCollapsed}
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
       />
 
-      {/* RIGHT SIDE */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-300
-          ${collapsed ? "md:ml-[80px]" : "md:ml-[260px]"}
+        className={`flex-1 flex flex-col transition-all
+          ${collapsed ? "md:ml-20" : "md:ml-64"}
         `}
       >
-        <Navbar user={user} />
+        <Navbar
+          user={user}
+          onMobileMenu={() => setMobileOpen(true)}
+        />
 
-        <div className="flex-1 p-6 overflow-y-auto h-screen pt-16 md:pt-6">
+        <main className="pt-14 md:pt-0 p-6">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );

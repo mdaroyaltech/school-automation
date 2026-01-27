@@ -84,7 +84,7 @@ const Settings = ({ user, setUser }) => {
                 className="
                   w-full border p-3 rounded-xl text-sm
     text-gray-800 dark:text-gray-200
-    bg-white dark:bg-slate-900
+    bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
                 "
@@ -107,7 +107,7 @@ const Settings = ({ user, setUser }) => {
                 className="
                   w-full border p-3 rounded-xl text-sm
     text-gray-800 dark:text-gray-200
-    bg-white dark:bg-slate-900
+    bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
                 "
@@ -130,7 +130,7 @@ const Settings = ({ user, setUser }) => {
                 className="
                   w-full border p-3 rounded-xl text-sm
     text-gray-800 dark:text-gray-200
-    bg-white dark:bg-slate-900
+    bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
                 "

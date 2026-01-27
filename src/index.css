@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark mode support */
+:root {
+  /* 🌤️ LIGHT MODE */
+  --bg-navbar: #ffffff;
+  --bg-sidebar: #0f3d7a;      /* custom deep blue */
+  --bg-page: #eef2f7;         /* soft gray-blue */
+
+  --text-primary: #020617;
+  --text-secondary: #475569;
+}
+
 .dark {
-  background-color: #0f172a;
+  /* 🌙 DARK MODE */
+  --bg-navbar: #020617;       /* pure slate-950 */
+  --bg-sidebar: #020617;      /* same dark, menu highlights pop */
+  --bg-page: #020617;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
 }

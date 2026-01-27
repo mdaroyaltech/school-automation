@@ -63,7 +63,7 @@ const Circular = ({ user, setUser }) => {
           className="
             w-full p-3 rounded-xl mb-4 resize-none
             border border-gray-300 dark:border-slate-700
-            bg-white dark:bg-slate-900
+            bg-navbar text-textPrimary
             text-gray-800 dark:text-gray-200
             focus:outline-none focus:ring-2 focus:ring-blue-500
           "

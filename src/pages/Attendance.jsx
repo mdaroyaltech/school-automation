@@ -72,7 +72,7 @@ const Attendance = ({ user, setUser }) => {
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             className="w-full border rounded-lg p-2
-              bg-white dark:bg-slate-900
+              bg-navbar text-textPrimary
               text-gray-800 dark:text-gray-200
               border-gray-300 dark:border-slate-700"
           >
@@ -89,7 +89,7 @@ const Attendance = ({ user, setUser }) => {
             value={section}
             onChange={(e) => setSection(e.target.value)}
             className="w-full border rounded-lg p-2
-              bg-white dark:bg-slate-900
+              bg-navbar text-textPrimary
               text-gray-800 dark:text-gray-200
               border-gray-300 dark:border-slate-700"
           >
@@ -157,7 +157,7 @@ const Attendance = ({ user, setUser }) => {
           className="bg-blue-600 hover:bg-blue-700
             text-white px-8 py-3 rounded-xl
             font-semibold shadow transition"
-        >
+        >a
           Save Attendance
         </button>
       </div>

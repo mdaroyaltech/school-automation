@@ -51,7 +51,7 @@ const MarksEntry = ({ user, setUser }) => {
           value={className}
           onChange={(e) => setClassName(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
         >
           <option value="5">Class 5</option>
           <option value="6">Class 6</option>
@@ -61,7 +61,7 @@ const MarksEntry = ({ user, setUser }) => {
           value={section}
           onChange={(e) => setSection(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
         >
           <option value="A">Section A</option>
           <option value="B">Section B</option>
@@ -71,7 +71,7 @@ const MarksEntry = ({ user, setUser }) => {
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
         >
           {subjects.map((s) => (
             <option key={s}>{s}</option>
@@ -128,7 +128,7 @@ const MarksEntry = ({ user, setUser }) => {
                       placeholder="--"
                       className="w-24 border border-gray-300 dark:border-slate-700
                                  rounded-lg p-2 text-sm
-                                 bg-white dark:bg-slate-900
+                                 bg-navbar text-textPrimary
                                  text-gray-800 dark:text-gray-100
                                  placeholder-gray-400 dark:placeholder-gray-500"
                     />

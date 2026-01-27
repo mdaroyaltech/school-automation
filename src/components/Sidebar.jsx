@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -13,18 +13,26 @@ import {
   Settings,
 } from "lucide-react";
 
-const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
+const Sidebar = ({
+  user,
+  setUser,
+  collapsed,
+  setCollapsed,
+  mobileOpen,
+  setMobileOpen,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  useEffect(() => {
-  document.body.style.overflow = mobileOpen ? "hidden" : "auto";
-}, [mobileOpen]);
 
+  /* LOCK BODY SCROLL WHEN MOBILE SIDEBAR OPEN */
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+  }, [mobileOpen]);
 
   const logout = () => {
     setUser(null);
     navigate("/");
+    setMobileOpen(false);
   };
 
   /* ================= MENU CONFIG ================= */
@@ -38,17 +46,13 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
       { icon: Users, label: "Students", path: "/students" },
       { icon: Settings, label: "Settings", path: "/settings" },
     ],
-    Teacher: [
-      { icon: Users, label: "Attendance", path: "/attendance" },
-      { icon: FileText, label: "Marks Entry", path: "/marks-entry" },
-    ],
-    Parent: [
-      { icon: LayoutDashboard, label: "Dashboard", path: "/parent" },
-      { icon: Bell, label: "Circulars", path: "/parent-circulars" },
-      { icon: FileText, label: "Report Card", path: "/reports" },
-      { icon: IndianRupee, label: "Fees", path: "/fees" },
-    ],
   };
+
+  const roleKey = user?.role
+    ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+    : "Admin";
+
+  const menuList = MENUS[roleKey] || [];
 
   /* ================= MENU ITEM ================= */
   const MenuItem = ({ icon: Icon, label, path }) => {
@@ -60,30 +64,18 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
           navigate(path);
           setMobileOpen(false);
         }}
-        className={`
-          relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer
-          transition-all group
+        className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer
           ${
             active
               ? "bg-white/20 dark:bg-white/10"
               : "hover:bg-white/10 dark:hover:bg-white/5"
-          }
-        `}
+          }`}
       >
         {active && (
-          <span className="absolute left-0 top-2 bottom-2 w-1 bg-blue-300 rounded-r" />
+          <span className="absolute left-0 top-2 bottom-2 w-1 bg-blue-300 dark:bg-blue-400 rounded-r" />
         )}
 
-        <div
-          className={`
-            p-2 rounded-lg
-            ${
-              active
-                ? "bg-white/20"
-                : "bg-white/10 group-hover:bg-white/20"
-            }
-          `}
-        >
+        <div className="p-2 rounded-lg bg-white/10 dark:bg-white/5">
           <Icon size={18} />
         </div>
 
@@ -96,21 +88,8 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
     );
   };
 
-  const renderMenu = () =>
-    MENUS[user?.role]?.map((item) => (
-      <MenuItem key={item.path} {...item} />
-    ));
-
   return (
     <>
-      {/* ================= MOBILE TOP BAR ================= */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black border-b px-4 py-3 flex items-center justify-between">
-        <span className="font-bold">SchoolLMS</span>
-        <button onClick={() => setMobileOpen(true)}>
-          <Menu />
-        </button>
-      </div>
-
       {/* ================= DESKTOP SIDEBAR ================= */}
       <motion.div
         initial={false}
@@ -118,8 +97,7 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
         transition={{ duration: 0.25 }}
         className="
           hidden md:flex fixed top-0 left-0 h-screen z-40
-          bg-gradient-to-b from-blue-700 to-blue-800
-          dark:from-slate-950 dark:to-slate-900
+          bg-sidebar
           text-white flex-col px-3 py-4
         "
       >
@@ -145,66 +123,72 @@ const Sidebar = ({ user, setUser, collapsed, setCollapsed }) => {
         </div>
 
         {/* MENU */}
-        <div className="space-y-1 text-sm flex-1">
-          {renderMenu()}
+        <div className="space-y-1 flex-1">
+          {menuList.map((item) => (
+            <MenuItem key={item.path} {...item} />
+          ))}
         </div>
 
         {/* LOGOUT */}
-        <div className="pt-4 border-t border-white/20">
-          <button
-            onClick={logout}
-            className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 py-2.5 rounded-xl text-sm font-semibold"
-          >
-            <LogOut size={18} />
-            {!collapsed && "Logout"}
-          </button>
-        </div>
+        <button
+          onClick={logout}
+          className="mt-4 bg-red-500 hover:bg-red-600 py-2.5 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold"
+        >
+          <LogOut size={18} />
+          {!collapsed && "Logout"}
+        </button>
       </motion.div>
 
       {/* ================= MOBILE SIDEBAR ================= */}
       <AnimatePresence>
-  {mobileOpen && (
-    <motion.div
-      className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-black/40 md:hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={() => setMobileOpen(false)}
-    >
-      <motion.div
-        initial={{ x: -260 }}
-        animate={{ x: 0 }}
-        exit={{ x: -260 }}
-        transition={{ duration: 0.25 }}
-        onClick={(e) => e.stopPropagation()}
-        className="
-          fixed top-0 left-0 h-screen w-64
-          bg-gradient-to-b from-blue-700 to-blue-800
-          text-white px-3 py-4 flex flex-col
-        "
-      >
-        <div className="flex justify-end mb-4">
-          <X onClick={() => setMobileOpen(false)} />
-        </div>
+        {mobileOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 z-[9999] md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMobileOpen(false)}
+          >
+            <motion.div
+              initial={{ x: -260 }}
+              animate={{ x: 0 }}
+              exit={{ x: -260 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="
+                h-full w-64
+                bg-sidebar
+                text-white p-4 flex flex-col shadow-2xl
+              "
+            >
+              {/* CLOSE */}
+              <div className="flex justify-end mb-4">
+                <X
+                  onClick={() => setMobileOpen(false)}
+                  className="cursor-pointer"
+                />
+              </div>
 
-        <div className="space-y-1 flex-1">
-          {renderMenu()}
-        </div>
+              {/* MENU */}
+              <div className="space-y-1 flex-1">
+                {menuList.map((item) => (
+                  <MenuItem key={item.path} {...item} />
+                ))}
+              </div>
 
-        <button
-          onClick={logout}
-          className="bg-red-500 py-2.5 rounded-xl text-sm font-semibold"
-        >
-          Logout
-        </button>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+              {/* LOGOUT */}
+              <button
+                onClick={logout}
+                className="mt-4 bg-red-500 hover:bg-red-600 py-2.5 rounded-xl text-sm font-semibold"
+              >
+                Logout
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
 
 export default Sidebar;
-

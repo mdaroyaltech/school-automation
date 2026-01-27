@@ -353,7 +353,7 @@ const AdminDashboard = ({ user, setUser }) => {
 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
 
   {/* PRESENT */}
-  <div className="bg-white dark:bg-slate-900 border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+  <div className="bg-navbar text-textPrimary border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
     <p className="text-sm text-gray-600 dark:text-gray-200">
       Students Present
     </p>
@@ -366,7 +366,7 @@ const AdminDashboard = ({ user, setUser }) => {
   </div>
 
   {/* ABSENT */}
-  <div className="bg-white dark:bg-slate-900 border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+  <div className="bg-navbar text-textPrimary border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
     <p className="text-sm text-gray-600 dark:text-gray-200">
       Students Absent
     </p>
@@ -379,7 +379,7 @@ const AdminDashboard = ({ user, setUser }) => {
   </div>
 
   {/* CIRCULARS */}
-  <div className="bg-white dark:bg-slate-900 border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
+  <div className="bg-navbar text-textPrimary border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
     <p className="text-sm text-gray-600 dark:text-gray-200">
       Circulars Sent
     </p>
