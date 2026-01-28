@@ -5,15 +5,21 @@ const Settings = ({ user, setUser }) => {
   const [schoolName, setSchoolName] = useState("");
   const [academicYear, setAcademicYear] = useState("");
   const [contactEmail, setContactEmail] = useState("");
+  const [logo, setLogo] = useState(null);
   const [saved, setSaved] = useState(false);
 
-  /* LOAD SAVED SETTINGS (DEMO) */
+  /* LOAD SAVED SETTINGS */
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("school-settings"));
     if (data) {
       setSchoolName(data.schoolName || "");
       setAcademicYear(data.academicYear || "");
       setContactEmail(data.contactEmail || "");
+    }
+
+    const savedLogo = localStorage.getItem("school-logo");
+    if (savedLogo) {
+      setLogo(savedLogo);
     }
   }, []);
 
@@ -32,12 +38,24 @@ const Settings = ({ user, setUser }) => {
     setTimeout(() => setSaved(false), 2000);
   };
 
+  /* HANDLE LOGO UPLOAD */
+  const handleLogoUpload = (file) => {
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      localStorage.setItem("school-logo", reader.result);
+      setLogo(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <DashboardLayout user={user} setUser={setUser}>
       {/* HEADER */}
       <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+          <h1 className="text-3xl font-bold text-textPrimary">
             School Settings
           </h1>
           <p className="text-sm text-textSecondary mt-1">
@@ -46,11 +64,11 @@ const Settings = ({ user, setUser }) => {
         </div>
 
         {saved ? (
-          <div className="bg-green-100 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold dark:bg-green-900 dark:text-green-300">
+          <div className="bg-success/10 text-success px-4 py-2 rounded-xl text-sm font-semibold">
             ✅ Settings saved successfully
           </div>
         ) : (
-          <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold dark:bg-blue-900 dark:text-blue-300">
+          <div className="bg-info/10 text-info px-4 py-2 rounded-xl text-sm font-semibold">
             Admin Configuration
           </div>
         )}
@@ -60,7 +78,7 @@ const Settings = ({ user, setUser }) => {
       <div className="flex justify-center px-4">
         <div className="bg-card border border-cardBorder rounded-2xl shadow max-w-2xl w-full">
           {/* SECTION HEADER */}
-          <div className="px-8 py-6 border-b dark:border-slate-700">
+          <div className="px-8 py-6 border-b border-borderDefault">
             <h2 className="text-lg font-semibold text-textPrimary">
               General Information
             </h2>
@@ -71,9 +89,62 @@ const Settings = ({ user, setUser }) => {
 
           {/* CONTENT */}
           <div className="p-8 space-y-6">
+            {/* SCHOOL LOGO */}
+            <div>
+              <label className="block text-sm font-semibold text-textPrimary mb-2">
+                School Logo
+              </label>
+
+              <div className="flex items-center gap-6">
+                <div
+                  className="
+                    h-20 w-20 rounded-xl border border-borderDefault
+                    bg-navbar flex items-center justify-center
+                    overflow-hidden
+                  "
+                >
+                  {logo ? (
+                    <img
+                      src={logo}
+                      alt="School Logo"
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-textMuted text-xs text-center px-2">
+                      No Logo
+                    </span>
+                  )}
+                </div>
+
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) =>
+                      handleLogoUpload(e.target.files[0])
+                    }
+                  />
+                  <span
+                    className="
+                      inline-block bg-accent hover:bg-accent-hover
+                      text-white px-4 py-2 rounded-xl
+                      text-sm font-semibold transition
+                    "
+                  >
+                    Upload Logo
+                  </span>
+                </label>
+              </div>
+
+              <p className="text-xs text-textMuted mt-2">
+                Appears on Login screen & Navbar
+              </p>
+            </div>
+
             {/* SCHOOL NAME */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-textPrimary mb-2">
                 School Name
               </label>
               <input
@@ -82,21 +153,19 @@ const Settings = ({ user, setUser }) => {
                 onChange={(e) => setSchoolName(e.target.value)}
                 placeholder="ABC International School"
                 className="
-                  w-full border p-3 rounded-xl text-sm
-    text-textPrimary
-    bg-navbar text-textPrimary
-    focus:ring-2 focus:ring-blue-500 outline-none
-    dark:border-slate-700
+                  w-full border border-borderDefault p-3 rounded-xl text-sm
+                  bg-navbar text-textPrimary
+                  focus:ring-2 focus:ring-accent outline-none
                 "
               />
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-textMuted mt-1">
                 Displayed on dashboards and reports
               </p>
             </div>
 
             {/* ACADEMIC YEAR */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-textPrimary mb-2">
                 Academic Year
               </label>
               <input
@@ -105,21 +174,19 @@ const Settings = ({ user, setUser }) => {
                 onChange={(e) => setAcademicYear(e.target.value)}
                 placeholder="2025 – 2026"
                 className="
-                  w-full border p-3 rounded-xl text-sm
-    text-textPrimary
-    bg-navbar text-textPrimary
-    focus:ring-2 focus:ring-blue-500 outline-none
-    dark:border-slate-700
+                  w-full border border-borderDefault p-3 rounded-xl text-sm
+                  bg-navbar text-textPrimary
+                  focus:ring-2 focus:ring-accent outline-none
                 "
               />
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-textMuted mt-1">
                 Used for attendance, exams & reports
               </p>
             </div>
 
             {/* CONTACT EMAIL */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-textPrimary mb-2">
                 Contact Email
               </label>
               <input
@@ -128,27 +195,25 @@ const Settings = ({ user, setUser }) => {
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="school@email.com"
                 className="
-                  w-full border p-3 rounded-xl text-sm
-    text-textPrimary
-    bg-navbar text-textPrimary
-    focus:ring-2 focus:ring-blue-500 outline-none
-    dark:border-slate-700
+                  w-full border border-borderDefault p-3 rounded-xl text-sm
+                  bg-navbar text-textPrimary
+                  focus:ring-2 focus:ring-accent outline-none
                 "
               />
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-textMuted mt-1">
                 Official communication email
               </p>
             </div>
           </div>
 
           {/* FOOTER */}
-          <div className="px-8 py-6 border-t dark:border-slate-700 flex justify-end">
+          <div className="px-8 py-6 border-t border-borderDefault flex justify-end">
             <button
               onClick={saveSettings}
               className="
                 bg-accent hover:bg-accent-hover
                 text-white px-6 py-3 rounded-xl
-                font-semibold shadow
+                font-semibold shadow-card transition
               "
             >
               💾 Save Settings

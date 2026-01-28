@@ -16,11 +16,19 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
   /* 🏫 SCHOOL NAME */
   const [schoolName, setSchoolName] = useState("SchoolLMS");
 
+  /* 🏫 SCHOOL LOGO */
+  const [logo, setLogo] = useState(null);
+
+  /* LOAD SCHOOL SETTINGS + LOGO */
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("school-settings"));
     if (data?.schoolName) setSchoolName(data.schoolName);
+
+    const savedLogo = localStorage.getItem("school-logo");
+    if (savedLogo) setLogo(savedLogo);
   }, []);
 
+  /* APPLY THEME */
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
     localStorage.setItem("theme", dark ? "dark" : "light");
@@ -42,7 +50,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
 
   return (
     <>
-      {/* ================= MOBILE NAVBAR (FIXED DARK MODE) ================= */}
+      {/* ================= MOBILE NAVBAR ================= */}
       <div
         className="
           md:hidden fixed top-0 left-0 right-0 z-50 h-14
@@ -63,21 +71,77 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
           ☰
         </button>
 
+        {/* LOGO (CENTER) */}
+        <div className="flex items-center gap-2">
+          {logo && (
+            <img
+              src={logo}
+              alt="School Logo"
+              className="h-7 object-contain"
+            />
+          )}
+          <span className="text-sm font-semibold">
+            {schoolName}
+          </span>
+        </div>
+
         {/* RIGHT ICONS */}
-        <div className="flex items-center gap-3">
-          {/* DARK MODE */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setDark(!dark)}
             className="
               p-2 rounded-lg
               hover:bg-gray-100 dark:hover:bg-slate-800
-              text-textPrimary
             "
           >
             {dark ? (
               <Sun size={18} className="text-yellow-400" />
             ) : (
               <Moon size={18} />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* ================= DESKTOP NAVBAR ================= */}
+      <div
+        className="
+          hidden md:flex sticky top-0 z-40 h-16 w-full
+          bg-navbar border-b border-borderDefault
+          flex items-center justify-between px-6
+        "
+      >
+        {/* LEFT: LOGO + SCHOOL NAME */}
+        <div className="flex items-center gap-3">
+          {logo && (
+            <img
+              src={logo}
+              alt="School Logo"
+              className="h-9 w-auto object-contain"
+            />
+          )}
+
+          <div>
+            <h1 className="text-lg font-bold text-textPrimary">
+              {schoolName}
+            </h1>
+            <p className="text-xs text-textSecondary">
+              Smart Management System
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT ICONS */}
+        <div className="flex items-center gap-4 relative">
+          {/* DARK MODE */}
+          <button
+            onClick={() => setDark(!dark)}
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            {dark ? (
+              <Sun size={18} className="text-yellow-400" />
+            ) : (
+              <Moon size={18} className="text-gray-700 dark:text-gray-300" />
             )}
           </button>
 
@@ -88,19 +152,23 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
               className="
                 relative p-2 rounded-lg
                 hover:bg-gray-100 dark:hover:bg-slate-800
-                text-textPrimary
               "
             >
-              <Bell size={18} />
-              <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full" />
+              <Bell size={18} className="text-textPrimary" />
+              <span className="absolute top-1 right-1 h-2 w-2 bg-danger rounded-full" />
             </button>
 
             {showNotif && (
-              <div className="absolute right-0 mt-3 w-64 bg-navbar text-textPrimary border rounded-xl shadow-lg p-4 text-sm">
-                <p className="font-semibold mb-2 text-textPrimary">
+              <div className="
+                absolute right-0 mt-3 w-64
+                bg-navbar text-textPrimary
+                border border-borderDefault
+                rounded-xl shadow-lg p-4 text-sm
+              ">
+                <p className="font-semibold mb-2">
                   Notifications
                 </p>
-                <ul className="space-y-1 text-gray-600 dark:text-gray-300">
+                <ul className="space-y-1 text-textSecondary">
                   <li>📢 New Circular</li>
                   <li>📲 Attendance Alert</li>
                   <li>💰 Fees Paid</li>
@@ -114,20 +182,25 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
             <button
               onClick={() => setShowProfile(!showProfile)}
               className="
-                flex items-center gap-1
+                flex items-center gap-2
                 bg-blue-50 dark:bg-slate-800
-                px-2 py-1 rounded-full
+                px-3 py-1.5 rounded-full
                 text-sm font-semibold
                 text-blue-700 dark:text-gray-200
               "
             >
               <UserCircle size={18} />
-              Admin
+              {user?.role}
             </button>
 
             {showProfile && (
-              <div className="absolute right-0 mt-3 w-48 bg-navbar text-textPrimary border rounded-xl shadow-lg p-4 text-sm">
-                <p className="font-semibold text-textPrimary">
+              <div className="
+                absolute right-0 mt-3 w-48
+                bg-navbar text-textPrimary
+                border border-borderDefault
+                rounded-xl shadow-lg p-4 text-sm
+              ">
+                <p className="font-semibold">
                   {user?.email || "demo@school.com"}
                 </p>
                 <p className="text-textSecondary mt-1">
@@ -135,51 +208,6 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
                 </p>
               </div>
             )}
-          </div>
-        </div>
-      </div>
-
-      {/* ================= DESKTOP NAVBAR (UNCHANGED) ================= */}
-      <div className="hidden md:flex sticky top-0 z-40 h-16 w-full bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-6">
-        <div>
-          <h1 className="text-lg font-bold text-textPrimary">
-            {schoolName}
-          </h1>
-          <p className="text-xs text-textSecondary">
-            Smart Management System
-          </p>
-        </div>
-
-        <div className="flex items-center gap-4 relative">
-          <button
-            onClick={() => setDark(!dark)}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
-          >
-            {dark ? (
-              <Sun size={18} className="text-yellow-400" />
-            ) : (
-              <Moon size={18} className="text-gray-700 dark:text-gray-300" />
-            )}
-          </button>
-
-          <div ref={notifRef} className="relative">
-            <button
-              onClick={() => setShowNotif(!showNotif)}
-              className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
-            >
-              <Bell size={18} className="text-gray-700 dark:text-gray-300" />
-              <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full" />
-            </button>
-          </div>
-
-          <div ref={profileRef} className="relative">
-            <button
-              onClick={() => setShowProfile(!showProfile)}
-              className="flex items-center gap-2 bg-blue-50 dark:bg-slate-800 px-3 py-1.5 rounded-full text-sm font-semibold text-blue-700 dark:text-gray-200"
-            >
-              <UserCircle size={18} />
-              {user?.role}
-            </button>
           </div>
         </div>
       </div>
