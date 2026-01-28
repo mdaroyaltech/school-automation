@@ -29,12 +29,12 @@ const Fees = ({ user, setUser }) => {
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             Fees Management
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Track fee payments and pending dues
           </p>
         </div>
 
-        <div className="mt-4 md:mt-0 bg-white dark:bg-slate-800 px-4 py-2 rounded-lg shadow text-sm text-gray-700 dark:text-gray-300">
+        <div className="mt-4 md:mt-0 bg-card border border-cardBorder px-4 py-2 rounded-lg shadow text-sm text-gray-700 dark:text-gray-300">
           💰 Total Collection: <b>₹88,000</b>
         </div>
       </div>
@@ -46,12 +46,12 @@ const Fees = ({ user, setUser }) => {
           return (
             <div
               key={i}
-              className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow hover:shadow-lg transition"
+              className="bg-card border border-cardBorder p-6 rounded-2xl shadow hover:shadow-lg transition"
             >
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-textSecondary">
                 {f.name}
               </p>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+              <h3 className="text-lg font-semibold text-textPrimary">
                 Class {f.class}
               </h3>
 
@@ -59,14 +59,14 @@ const Fees = ({ user, setUser }) => {
                 <p className="text-gray-600 dark:text-gray-400">
                   Total: ₹{f.total.toLocaleString()}
                 </p>
-                <p className="text-green-600 dark:text-green-400">
+                <p className="text-success">
                   Paid: ₹{f.paid.toLocaleString()}
                 </p>
                 <p
                   className={
                     pending > 0
-                      ? "text-red-600 dark:text-red-400"
-                      : "text-green-600 dark:text-green-400"
+                      ? "text-danger"
+                      : "text-success"
                   }
                 >
                   Pending: ₹{pending.toLocaleString()}
@@ -78,7 +78,7 @@ const Fees = ({ user, setUser }) => {
                 className={`mt-4 w-full py-2 rounded-xl text-sm font-semibold
                   ${
                     pending > 0
-                      ? "bg-blue-600 hover:bg-blue-700 text-white"
+                      ? "bg-accent hover:bg-accent-hover text-white"
                       : "bg-green-600 hover:bg-green-700 text-white"
                   }`}
               >
@@ -90,8 +90,8 @@ const Fees = ({ user, setUser }) => {
       </div>
 
       {/* DETAILED TABLE */}
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-        <h2 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+        <h2 className="font-semibold text-textPrimary mb-4">
           Fee Details
         </h2>
 
@@ -128,23 +128,23 @@ const Fees = ({ user, setUser }) => {
                     key={i}
                     className="border-b border-gray-200 dark:border-slate-700"
                   >
-                    <td className="py-2 text-gray-800 dark:text-gray-200">
+                    <td className="py-2 text-textPrimary">
                       {f.name}
                     </td>
-                    <td className="py-2 text-gray-800 dark:text-gray-200">
+                    <td className="py-2 text-textPrimary">
                       {f.class}
                     </td>
-                    <td className="py-2 text-gray-800 dark:text-gray-200">
+                    <td className="py-2 text-textPrimary">
                       ₹{f.total.toLocaleString()}
                     </td>
-                    <td className="py-2 text-green-600 dark:text-green-400">
+                    <td className="py-2 text-success">
                       ₹{f.paid.toLocaleString()}
                     </td>
                     <td
                       className={
                         pending > 0
-                          ? "py-2 text-red-600 dark:text-red-400"
-                          : "py-2 text-green-600 dark:text-green-400"
+                          ? "py-2 text-danger"
+                          : "py-2 text-success"
                       }
                     >
                       ₹{pending.toLocaleString()}
@@ -152,7 +152,7 @@ const Fees = ({ user, setUser }) => {
                     <td className="py-2">
                       <button
                         onClick={downloadReceipt}
-                        className="bg-indigo-600 hover:bg-indigo-700
+                        className="bg-accent hover:bg-accent-hover
                           text-white px-3 py-1 rounded text-xs"
                       >
                         Download

@@ -44,7 +44,7 @@ const Students = ({ user, setUser }) => {
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             Students
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Student management & records
           </p>
         </div>
@@ -64,7 +64,7 @@ const Students = ({ user, setUser }) => {
       </div>
 
       {/* FILTERS */}
-      <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow flex flex-wrap gap-4 mb-10">
+      <div className="bg-card border border-cardBorder p-5 rounded-2xl shadow flex flex-wrap gap-4 mb-10">
         <select
           value={className}
           onChange={(e) => setClassName(e.target.value)}
@@ -106,7 +106,7 @@ const Students = ({ user, setUser }) => {
           <div
             key={index}
             onClick={() => setSelectedStudent(name)}
-            className="cursor-pointer bg-white dark:bg-slate-800 p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-0.5 transition-all flex justify-between"
+            className="cursor-pointer bg-card border border-cardBorder p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-0.5 transition-all flex justify-between"
           >
             <div className="flex items-center gap-5">
               <div className="h-12 w-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-bold">
@@ -166,7 +166,7 @@ const Students = ({ user, setUser }) => {
 
             <button
               onClick={() => setSelectedStudent(null)}
-              className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl"
+              className="mt-6 w-full bg-accent hover:bg-accent-hover text-white py-2 rounded-xl"
             >
               Close
             </button>

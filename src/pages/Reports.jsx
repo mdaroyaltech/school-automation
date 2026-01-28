@@ -40,7 +40,7 @@ const Reports = ({ user, setUser }) => {
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             Report Card
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Academic performance overview
           </p>
         </div>
@@ -52,8 +52,8 @@ const Reports = ({ user, setUser }) => {
           className="
             mt-4 md:mt-0
             border rounded-lg px-4 py-2
-            bg-white dark:bg-slate-800
-            text-gray-800 dark:text-gray-200
+            bg-card border border-cardBorder
+            text-textPrimary
             border-gray-300 dark:border-slate-700
           "
         >
@@ -78,35 +78,35 @@ const Reports = ({ user, setUser }) => {
       </div>
 
       {/* STUDENT INFO */}
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-textSecondary">
             Student Name
           </p>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          <p className="text-lg font-semibold text-textPrimary">
             {student.name}
           </p>
         </div>
 
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-textSecondary">
             Class
           </p>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          <p className="text-lg font-semibold text-textPrimary">
             {student.class}
           </p>
         </div>
 
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-textSecondary">
             Overall Result
           </p>
           <p
             className={`text-lg font-bold
               ${
                 pass
-                  ? "text-green-600 dark:text-green-400"
-                  : "text-red-600 dark:text-red-400"
+                  ? "text-success"
+                  : "text-danger"
               }`}
           >
             {pass ? "Pass" : "Fail"}
@@ -129,12 +129,12 @@ const Reports = ({ user, setUser }) => {
           return (
             <div
               key={i}
-              className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow hover:shadow-lg transition"
+              className="bg-card border border-cardBorder p-6 rounded-2xl shadow hover:shadow-lg transition"
             >
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-textSecondary">
                 Subject
               </p>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+              <h3 className="text-lg font-semibold text-textPrimary">
                 {s.name}
               </h3>
 

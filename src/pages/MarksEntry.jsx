@@ -46,12 +46,12 @@ const MarksEntry = ({ user, setUser }) => {
       </div>
 
       {/* FILTERS */}
-      <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow flex flex-wrap gap-4 mb-10">
+      <div className="bg-card border border-cardBorder p-5 rounded-2xl shadow flex flex-wrap gap-4 mb-10">
         <select
           value={className}
           onChange={(e) => setClassName(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-textPrimary"
         >
           <option value="5">Class 5</option>
           <option value="6">Class 6</option>
@@ -61,7 +61,7 @@ const MarksEntry = ({ user, setUser }) => {
           value={section}
           onChange={(e) => setSection(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-textPrimary"
         >
           <option value="A">Section A</option>
           <option value="B">Section B</option>
@@ -71,7 +71,7 @@ const MarksEntry = ({ user, setUser }) => {
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           className="border border-gray-300 dark:border-slate-700 p-3 rounded-xl text-sm
-                     bg-navbar text-textPrimary text-gray-800 dark:text-gray-200"
+                     bg-navbar text-textPrimary text-textPrimary"
         >
           {subjects.map((s) => (
             <option key={s}>{s}</option>
@@ -80,7 +80,7 @@ const MarksEntry = ({ user, setUser }) => {
       </div>
 
       {/* MARKS TABLE */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow overflow-hidden">
+      <div className="bg-card border border-cardBorder rounded-2xl shadow overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-gray-100 dark:bg-slate-700">
             <tr>
@@ -140,11 +140,11 @@ const MarksEntry = ({ user, setUser }) => {
                         Not Entered
                       </span>
                     ) : pass ? (
-                      <span className="text-green-600 dark:text-green-400 font-semibold text-xs">
+                      <span className="text-success font-semibold text-xs">
                         Pass
                       </span>
                     ) : (
-                      <span className="text-red-600 dark:text-red-400 font-semibold text-xs">
+                      <span className="text-danger font-semibold text-xs">
                         Fail
                       </span>
                     )}
@@ -160,7 +160,7 @@ const MarksEntry = ({ user, setUser }) => {
       <div className="mt-8 flex justify-end">
         <button
           onClick={saveMarks}
-          className="bg-blue-600 hover:bg-blue-700 text-white
+          className="bg-accent hover:bg-accent-hover text-white
                      px-6 py-3 rounded-xl font-semibold shadow"
         >
           💾 Save Marks

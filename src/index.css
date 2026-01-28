@@ -2,22 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===============================
+   🌤️ LIGHT MODE (ENTERPRISE)
+   =============================== */
 :root {
-  /* 🌤️ LIGHT MODE */
-  --bg-navbar: #ffffff;
-  --bg-sidebar: #0f3d7a;      /* custom deep blue */
-  --bg-page: #eef2f7;         /* soft gray-blue */
+  /* SURFACES */
+  --bg-navbar: #ffffff;          /* clean white */
+  --bg-sidebar: #0f3d7a;         /* deep brand blue */
+  --bg-page: #eef2f7;            /* soft gray-blue background */
+  --bg-card: #fdfefe;            /* off-white card surface */
 
-  --text-primary: #020617;
-  --text-secondary: #475569;
+  /* BORDERS */
+  --border-card: #dbeafe;        /* blue-100 (subtle brand hint) */
+  --border-default: #e5e7eb;     /* gray-200 */
+
+  /* TEXT */
+  --text-primary: #020617;       /* slate-950 */
+  --text-secondary: #475569;     /* slate-600 */
+  --text-muted: #64748b;         /* slate-500 */
+
+  /* BRAND / ACTION COLORS */
+  --accent: #2563eb;             /* blue-600 */
+  --accent-hover: #1d4ed8;       /* blue-700 */
+
+  /* STATUS COLORS */
+  --success: #16a34a;            /* green-600 */
+  --warning: #f59e0b;            /* amber-500 */
+  --danger: #dc2626;             /* red-600 */
+  --info: #0284c7;               /* sky-600 */
+
+  /* SHADOW (optional use) */
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.06);
 }
 
+/* ===============================
+   🌙 DARK MODE (PREMIUM)
+   =============================== */
 .dark {
-  /* 🌙 DARK MODE */
-  --bg-navbar: #020617;       /* pure slate-950 */
-  --bg-sidebar: #020617;      /* same dark, menu highlights pop */
-  --bg-page: #020617;
+  /* SURFACES */
+  --bg-navbar: #020617;          /* slate-950 */
+  --bg-sidebar: #020617;         /* slate-950 */
+  --bg-page: #020617;            /* slate-950 */
+  --bg-card: #0f172a;            /* slate-900 (layered above page) */
 
-  --text-primary: #e5e7eb;
-  --text-secondary: #9ca3af;
+  /* BORDERS */
+  --border-card: #1e3a8a;        /* blue-800 */
+  --border-default: #334155;     /* slate-700 */
+
+  /* TEXT */
+  --text-primary: #e5e7eb;       /* gray-200 */
+  --text-secondary: #9ca3af;     /* gray-400 */
+  --text-muted: #64748b;         /* slate-500 */
+
+  /* BRAND / ACTION COLORS */
+  --accent: #3b82f6;             /* blue-500 */
+  --accent-hover: #2563eb;       /* blue-600 */
+
+  /* STATUS COLORS */
+  --success: #22c55e;            /* green-500 */
+  --warning: #fbbf24;            /* amber-400 */
+  --danger: #ef4444;             /* red-500 */
+  --info: #38bdf8;               /* sky-400 */
+
+  /* SHADOW */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.4);
 }

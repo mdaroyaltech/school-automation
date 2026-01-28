@@ -14,13 +14,13 @@ const ParentDashboard = ({ user, setUser }) => {
         <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
           Parent Dashboard
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-sm text-textSecondary mt-1">
           Student overview & daily updates
         </p>
       </div>
 
       {/* STUDENT PROFILE CARD */}
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div className="flex items-center gap-4">
           <div className="h-14 w-14 rounded-full bg-blue-100 dark:bg-blue-900
             flex items-center justify-center text-2xl">
@@ -28,13 +28,13 @@ const ParentDashboard = ({ user, setUser }) => {
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-textSecondary">
               Student Name
             </p>
-            <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            <p className="text-lg font-semibold text-textPrimary">
               Ayaan Khan
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-textSecondary">
               Class 5-A
             </p>
           </div>
@@ -59,8 +59,8 @@ const ParentDashboard = ({ user, setUser }) => {
       {/* DASHBOARD CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         {/* ATTENDANCE SUMMARY */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+        <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+          <p className="text-sm text-textSecondary mb-1">
             Attendance Summary
           </p>
           <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
@@ -72,11 +72,11 @@ const ParentDashboard = ({ user, setUser }) => {
         </div>
 
         {/* FEES STATUS */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+        <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+          <p className="text-sm text-textSecondary mb-1">
             Fees Status
           </p>
-          <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+          <p className="text-2xl font-bold text-success">
             Paid ✅
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
@@ -85,8 +85,8 @@ const ParentDashboard = ({ user, setUser }) => {
         </div>
 
         {/* PERFORMANCE */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+        <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+          <p className="text-sm text-textSecondary mb-1">
             Academic Performance
           </p>
           <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
@@ -102,7 +102,7 @@ const ParentDashboard = ({ user, setUser }) => {
       <div className="bg-gradient-to-r from-yellow-100 to-orange-100
         dark:from-yellow-900 dark:to-orange-900
         p-6 rounded-2xl shadow">
-        <h2 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+        <h2 className="font-semibold text-textPrimary mb-2">
           📢 Important Notice
         </h2>
         <p className="text-gray-700 dark:text-gray-300">

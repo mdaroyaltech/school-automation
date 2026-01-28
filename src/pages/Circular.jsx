@@ -37,7 +37,7 @@ const Circular = ({ user, setUser }) => {
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             Circular Management
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Publish announcements for parents & students
           </p>
         </div>
@@ -50,8 +50,8 @@ const Circular = ({ user, setUser }) => {
       </div>
 
       {/* ADD CIRCULAR CARD */}
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-10">
-        <h2 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-10">
+        <h2 className="font-semibold text-textPrimary mb-3">
           ➕ New Circular
         </h2>
 
@@ -64,7 +64,7 @@ const Circular = ({ user, setUser }) => {
             w-full p-3 rounded-xl mb-4 resize-none
             border border-gray-300 dark:border-slate-700
             bg-navbar text-textPrimary
-            text-gray-800 dark:text-gray-200
+            text-textPrimary
             focus:outline-none focus:ring-2 focus:ring-blue-500
           "
         />
@@ -73,7 +73,7 @@ const Circular = ({ user, setUser }) => {
           <button
             onClick={addCircular}
             className="
-              bg-blue-600 hover:bg-blue-700
+              bg-accent hover:bg-accent-hover
               text-white px-6 py-2 rounded-xl
               font-semibold shadow transition
             "
@@ -89,7 +89,7 @@ const Circular = ({ user, setUser }) => {
           <div
             key={i}
             className="
-              bg-white dark:bg-slate-800
+              bg-card border border-cardBorder
               p-5 rounded-2xl shadow
               flex gap-4
               hover:shadow-lg transition
@@ -100,10 +100,10 @@ const Circular = ({ user, setUser }) => {
 
             {/* CONTENT */}
             <div className="flex-1">
-              <p className="text-gray-800 dark:text-gray-200 font-medium">
+              <p className="text-textPrimary font-medium">
                 {c.text}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-textSecondary mt-1">
                 Published {c.date}
               </p>
             </div>

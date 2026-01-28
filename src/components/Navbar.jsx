@@ -47,7 +47,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
         className="
           md:hidden fixed top-0 left-0 right-0 z-50 h-14
           bg-navbar text-textPrimary
-          border-b border-gray-200 dark:border-slate-700
+          border-b border-borderDefault
           flex items-center justify-between px-4
         "
       >
@@ -57,7 +57,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
           className="
             p-2 rounded-lg
             hover:bg-gray-100 dark:hover:bg-slate-800
-            text-gray-800 dark:text-gray-200
+            text-textPrimary
           "
         >
           ☰
@@ -71,7 +71,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
             className="
               p-2 rounded-lg
               hover:bg-gray-100 dark:hover:bg-slate-800
-              text-gray-800 dark:text-gray-200
+              text-textPrimary
             "
           >
             {dark ? (
@@ -88,7 +88,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
               className="
                 relative p-2 rounded-lg
                 hover:bg-gray-100 dark:hover:bg-slate-800
-                text-gray-800 dark:text-gray-200
+                text-textPrimary
               "
             >
               <Bell size={18} />
@@ -97,7 +97,7 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
 
             {showNotif && (
               <div className="absolute right-0 mt-3 w-64 bg-navbar text-textPrimary border rounded-xl shadow-lg p-4 text-sm">
-                <p className="font-semibold mb-2 text-gray-800 dark:text-gray-200">
+                <p className="font-semibold mb-2 text-textPrimary">
                   Notifications
                 </p>
                 <ul className="space-y-1 text-gray-600 dark:text-gray-300">
@@ -127,10 +127,10 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
 
             {showProfile && (
               <div className="absolute right-0 mt-3 w-48 bg-navbar text-textPrimary border rounded-xl shadow-lg p-4 text-sm">
-                <p className="font-semibold text-gray-800 dark:text-gray-200">
+                <p className="font-semibold text-textPrimary">
                   {user?.email || "demo@school.com"}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-textSecondary mt-1">
                   Role: {user?.role}
                 </p>
               </div>
@@ -142,10 +142,10 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
       {/* ================= DESKTOP NAVBAR (UNCHANGED) ================= */}
       <div className="hidden md:flex sticky top-0 z-40 h-16 w-full bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-6">
         <div>
-          <h1 className="text-lg font-bold text-gray-800 dark:text-gray-200">
+          <h1 className="text-lg font-bold text-textPrimary">
             {schoolName}
           </h1>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-textSecondary">
             Smart Management System
           </p>
         </div>

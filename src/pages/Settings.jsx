@@ -40,7 +40,7 @@ const Settings = ({ user, setUser }) => {
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             School Settings
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Manage basic configuration for your institution
           </p>
         </div>
@@ -58,13 +58,13 @@ const Settings = ({ user, setUser }) => {
 
       {/* CENTERED SETTINGS CARD */}
       <div className="flex justify-center px-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow max-w-2xl w-full">
+        <div className="bg-card border border-cardBorder rounded-2xl shadow max-w-2xl w-full">
           {/* SECTION HEADER */}
           <div className="px-8 py-6 border-b dark:border-slate-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            <h2 className="text-lg font-semibold text-textPrimary">
               General Information
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-textSecondary">
               These details appear across the system
             </p>
           </div>
@@ -83,7 +83,7 @@ const Settings = ({ user, setUser }) => {
                 placeholder="ABC International School"
                 className="
                   w-full border p-3 rounded-xl text-sm
-    text-gray-800 dark:text-gray-200
+    text-textPrimary
     bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
@@ -106,7 +106,7 @@ const Settings = ({ user, setUser }) => {
                 placeholder="2025 – 2026"
                 className="
                   w-full border p-3 rounded-xl text-sm
-    text-gray-800 dark:text-gray-200
+    text-textPrimary
     bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
@@ -129,7 +129,7 @@ const Settings = ({ user, setUser }) => {
                 placeholder="school@email.com"
                 className="
                   w-full border p-3 rounded-xl text-sm
-    text-gray-800 dark:text-gray-200
+    text-textPrimary
     bg-navbar text-textPrimary
     focus:ring-2 focus:ring-blue-500 outline-none
     dark:border-slate-700
@@ -146,7 +146,7 @@ const Settings = ({ user, setUser }) => {
             <button
               onClick={saveSettings}
               className="
-                bg-blue-600 hover:bg-blue-700
+                bg-accent hover:bg-accent-hover
                 text-white px-6 py-3 rounded-xl
                 font-semibold shadow
               "

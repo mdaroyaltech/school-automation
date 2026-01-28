@@ -64,8 +64,8 @@ const Attendance = ({ user, setUser }) => {
 
       {/* FILTER PANEL (NEW DESIGN) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+        <div className="bg-card border border-cardBorder p-5 rounded-2xl shadow">
+          <p className="text-xs text-textSecondary mb-1">
             Select Class
           </p>
           <select
@@ -73,7 +73,7 @@ const Attendance = ({ user, setUser }) => {
             onChange={(e) => setClassName(e.target.value)}
             className="w-full border rounded-lg p-2
               bg-navbar text-textPrimary
-              text-gray-800 dark:text-gray-200
+              text-textPrimary
               border-gray-300 dark:border-slate-700"
           >
             <option>5</option>
@@ -81,8 +81,8 @@ const Attendance = ({ user, setUser }) => {
           </select>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+        <div className="bg-card border border-cardBorder p-5 rounded-2xl shadow">
+          <p className="text-xs text-textSecondary mb-1">
             Section
           </p>
           <select
@@ -90,7 +90,7 @@ const Attendance = ({ user, setUser }) => {
             onChange={(e) => setSection(e.target.value)}
             className="w-full border rounded-lg p-2
               bg-navbar text-textPrimary
-              text-gray-800 dark:text-gray-200
+              text-textPrimary
               border-gray-300 dark:border-slate-700"
           >
             <option>A</option>
@@ -99,16 +99,16 @@ const Attendance = ({ user, setUser }) => {
         </div>
 
         {/* STATUS CARD */}
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow flex flex-col justify-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="bg-card border border-cardBorder p-5 rounded-2xl shadow flex flex-col justify-center">
+          <p className="text-xs text-textSecondary">
             Attendance Status
           </p>
           <p
             className={`text-lg font-bold mt-1
               ${
                 percent >= 75
-                  ? "text-green-600 dark:text-green-400"
-                  : "text-red-600 dark:text-red-400"
+                  ? "text-success"
+                  : "text-danger"
               }`}
           >
             {percent >= 75 ? "Good Attendance" : "Needs Attention"}
@@ -121,16 +121,16 @@ const Attendance = ({ user, setUser }) => {
         {students.map((s, i) => (
           <div
             key={i}
-            className="bg-white dark:bg-slate-800
+            className="bg-card border border-cardBorder
               p-5 rounded-2xl shadow
               flex items-center justify-between
               hover:shadow-lg transition"
           >
             <div>
-              <p className="font-semibold text-gray-800 dark:text-gray-200">
+              <p className="font-semibold text-textPrimary">
                 {s.name}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-textSecondary">
                 Roll No: {i + 1}
               </p>
             </div>
@@ -154,7 +154,7 @@ const Attendance = ({ user, setUser }) => {
       <div className="mt-10 flex justify-end">
         <button
           onClick={saveAttendance}
-          className="bg-blue-600 hover:bg-blue-700
+          className="bg-accent hover:bg-accent-hover
             text-white px-8 py-3 rounded-xl
             font-semibold shadow transition"
         >a

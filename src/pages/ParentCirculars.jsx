@@ -27,7 +27,7 @@ const ParentCirculars = ({ user, setUser }) => {
         <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
           School Circulars
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-sm text-textSecondary mt-1">
           Important updates from school administration
         </p>
       </div>
@@ -38,7 +38,7 @@ const ParentCirculars = ({ user, setUser }) => {
           <div
             key={i}
             className="
-              bg-white dark:bg-slate-800
+              bg-card border border-cardBorder
               p-6 rounded-2xl shadow
               flex gap-5 items-start
               hover:shadow-lg transition
@@ -58,11 +58,11 @@ const ParentCirculars = ({ user, setUser }) => {
 
             {/* CONTENT */}
             <div className="flex-1">
-              <p className="text-gray-800 dark:text-gray-200 font-semibold text-lg">
+              <p className="text-textPrimary font-semibold text-lg">
                 {c.text}
               </p>
 
-              <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-4 mt-2 text-sm text-textSecondary">
                 <span>📅 {c.date}</span>
                 <span>🏫 School Administration</span>
               </div>

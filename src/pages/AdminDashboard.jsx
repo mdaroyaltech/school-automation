@@ -128,10 +128,10 @@ const AdminDashboard = ({ user, setUser }) => {
       {/* HEADER */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+          <h1 className="text-3xl font-bold text-textPrimary">
             {schoolName} — Admin Dashboard
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm text-textSecondary mt-1">
             Overview of today’s school activity
           </p>
         </div>
@@ -141,9 +141,8 @@ const AdminDashboard = ({ user, setUser }) => {
           <div
             className="
               flex items-center gap-2
-              bg-white dark:bg-slate-800
+              bg-card border border-cardBorder
               px-4 py-2 rounded-xl shadow
-              border border-gray-200 dark:border-slate-700
             "
           >
             <span>📅</span>
@@ -155,7 +154,7 @@ const AdminDashboard = ({ user, setUser }) => {
               className="
                 bg-transparent outline-none
                 text-sm font-semibold
-                text-gray-800 dark:text-gray-200
+                text-textPrimary
               "
             />
           </div>
@@ -175,7 +174,7 @@ const AdminDashboard = ({ user, setUser }) => {
       </div>
 
       {/* QUICK ACTIONS */}
-<div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
   {[
     { label: "Mark Attendance", icon: "🧑" },
     { label: "Add Student", icon: "➕" },
@@ -185,15 +184,15 @@ const AdminDashboard = ({ user, setUser }) => {
     <button
       key={item.label}
       className="
-        bg-white dark:bg-slate-800
+        bg-card border border-cardBorder
         p-5 rounded-2xl shadow
         hover:shadow-lg hover:-translate-y-0.5 transition
         text-sm font-semibold
         flex flex-col items-center gap-2
-        text-gray-800 dark:text-gray-100
+        text-textPrimary
       "
     >
-      <span className="text-3xl text-gray-700 dark:text-gray-200">
+      <span className="text-3xl text-textSecondary">
         {item.icon}
       </span>
       {item.label}
@@ -241,7 +240,7 @@ const AdminDashboard = ({ user, setUser }) => {
         whileHover={{ y: -4 }}
         transition={{ type: "spring", stiffness: 300 }}
         className="
-          bg-white dark:bg-slate-800
+          bg-card border border-cardBorder
           p-6 rounded-2xl shadow
           hover:shadow-xl
           transition-all duration-300
@@ -250,10 +249,10 @@ const AdminDashboard = ({ user, setUser }) => {
       >
         {/* LEFT */}
         <div>
-          <p className="ttext-sm text-gray-600 dark:text-gray-200">
+          <p className="text-sm text-textSecondary">
             {card.title}
           </p>
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mt-2">
+          <h2 className="text-3xl font-bold text-textPrimary mt-2">
             {card.value}
           </h2>
         </div>
@@ -289,12 +288,12 @@ const AdminDashboard = ({ user, setUser }) => {
       {/* GRID SECTION */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
   {/* OVERALL ATTENDANCE */}
-  <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow lg:col-span-2">
-    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
+  <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow lg:col-span-2">
+    <h3 className="font-semibold text-textPrimary mb-4">
       Overall Attendance
     </h3>
 
-    <div className="flex justify-between text-sm mb-2 text-gray-700 dark:text-gray-200">
+    <div className="flex justify-between text-sm mb-2 text-textSecondary">
       <span>{selectedDate === today ? "Today" : "Selected Date"}</span>
       <span>{attendance}%</span>
     </div>
@@ -306,18 +305,18 @@ const AdminDashboard = ({ user, setUser }) => {
       />
     </div>
 
-    <p className="text-xs text-gray-500 dark:text-gray-300 mt-2">
+    <p className="text-xs text-textSecondary mt-2">
       Attendance based on selected date
     </p>
   </div>
 
   {/* FEES */}
-  <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+  <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+    <h3 className="font-semibold text-textPrimary mb-3">
       Fees Status
     </h3>
 
-    <p className="text-sm text-gray-600 dark:text-gray-300">
+    <p className="text-sm text-textSecondary">
       Collected: ₹12,00,000
     </p>
 
@@ -332,16 +331,16 @@ const AdminDashboard = ({ user, setUser }) => {
 </div>
 
 {/* RECENT ACTIVITIES */}
-<div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow mb-10">
-  <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
+<div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-10">
+  <h3 className="font-semibold text-textPrimary mb-4">
     Recent Activities
   </h3>
 
-  <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
+  <ul className="space-y-3 text-sm text-textSecondary">
     {activities.map((item, i) => (
       <li key={i} className="flex justify-between">
         <span>{item.text}</span>
-        <span className="text-gray-400 dark:text-gray-400">
+        <span className="text-textSecondary">
           {item.time}
         </span>
       </li>
@@ -354,10 +353,10 @@ const AdminDashboard = ({ user, setUser }) => {
 
   {/* PRESENT */}
   <div className="bg-navbar text-textPrimary border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-600 dark:text-gray-200">
+    <p className="text-sm text-textSecondary">
       Students Present
     </p>
-    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
       {summary.present}
     </h2>
     <p className="text-xs text-green-600 mt-1">
@@ -367,10 +366,10 @@ const AdminDashboard = ({ user, setUser }) => {
 
   {/* ABSENT */}
   <div className="bg-navbar text-textPrimary border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-600 dark:text-gray-200">
+    <p className="text-sm text-textSecondary">
       Students Absent
     </p>
-    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
       {summary.absent}
     </h2>
     <p className="text-xs text-red-600 mt-1">
@@ -380,10 +379,10 @@ const AdminDashboard = ({ user, setUser }) => {
 
   {/* CIRCULARS */}
   <div className="bg-navbar text-textPrimary border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-gray-600 dark:text-gray-200">
+    <p className="text-sm text-textSecondary">
       Circulars Sent
     </p>
-    <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mt-2">
+    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
       {summary.circulars}
     </h2>
     <p className="text-xs text-blue-600 mt-1">
@@ -395,14 +394,14 @@ const AdminDashboard = ({ user, setUser }) => {
 
 
       {/* CLASS-WISE ATTENDANCE */}
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow">
-        <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-4">
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+        <h3 className="font-semibold text-textPrimary mb-4">
           Class-wise Attendance
         </h3>
 
         {classAttendance.map(([cls, percent]) => (
           <div key={cls} className="mb-4">
-            <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300 mb-1">
+            <div className="flex justify-between text-sm text-textSecondary mb-1">
               <span>Class {cls}</span>
               <span>{percent}%</span>
             </div>
