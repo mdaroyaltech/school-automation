@@ -10,7 +10,7 @@ import { emailLoginAPI } from "../api/authApi";
 /* ================= DEMO USERS ================= */
 const DEMO = {
   Admin: { email: "admin@school.com", password: "admin123", redirect: "/admin" },
-  Teacher: { email: "teacher@school.com", password: "teacher123", redirect: "/attendance" },
+  Teacher: { email: "teacher@school.com", password: "teacher123", redirect: "/teacher" },
   Parent: { email: "parent@school.com", password: "parent123", redirect: "/parent" },
 };
 

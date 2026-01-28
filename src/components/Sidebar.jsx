@@ -36,7 +36,8 @@ const Sidebar = ({
   };
 
   /* ================= MENU CONFIG ================= */
-  const MENUS = {
+const MENUS = {
+  /* ========== ADMIN ========== */
   Admin: [
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
     { icon: Users, label: "Attendance", path: "/attendance" },
@@ -47,12 +48,15 @@ const Sidebar = ({
     { icon: Settings, label: "Settings", path: "/settings" },
   ],
 
+  /* ========== TEACHER ========== */
   Teacher: [
+    { icon: LayoutDashboard, label: "Dashboard", path: "/teacher" },   // ✅ NEW
     { icon: Users, label: "Attendance", path: "/attendance" },
-    { icon: FileText, label: "Reports", path: "/reports" },
+    { icon: FileText, label: "Marks Entry", path: "/marks-entry" },    // ✅ FIX
     { icon: Bell, label: "Circulars", path: "/circular" },
   ],
 
+  /* ========== PARENT ========== */
   Parent: [
     { icon: LayoutDashboard, label: "Dashboard", path: "/parent" },
     { icon: Bell, label: "Circulars", path: "/parent-circulars" },

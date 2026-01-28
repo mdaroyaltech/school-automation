@@ -13,6 +13,7 @@ import ParentCirculars from "./pages/ParentCirculars";
 import Students from "./pages/Students";
 import MarksEntry from "./pages/MarksEntry";
 import Settings from "./pages/Settings";
+import TeacherDashboard from "./pages/TeacherDashboard";
 
 function App() {
   const [user, setUser] = useState(null); // { role, email }
@@ -58,25 +59,37 @@ function App() {
             </ProtectedRoute>
           }
         />
+        
+            {/* TEACHER DASHBOARD (MAIN) */}
+            <Route
+              path="/teacher"
+              element={
+                <ProtectedRoute user={user} allowedRoles={["Teacher"]}>
+                  <TeacherDashboard user={user} setUser={setUser} />
+                </ProtectedRoute>
+              }
+            />
 
+            {/* ATTENDANCE MODULE */}
+            <Route
+              path="/attendance"
+              element={
+                <ProtectedRoute user={user} allowedRoles={["Admin", "Teacher"]}>
+                  <Attendance user={user} setUser={setUser} />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* ================= TEACHER ROUTES ================= */}
-        <Route
-          path="/attendance"
-          element={
-            <ProtectedRoute user={user} allowedRoles={["Admin", "Teacher"]}>
-              <Attendance user={user} setUser={setUser} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/marks-entry"
-          element={
-            <ProtectedRoute user={user}>
-              <MarksEntry user={user} setUser={setUser} />
-            </ProtectedRoute>
-          }
-        />
+            {/* MARKS ENTRY */}
+            <Route
+              path="/marks-entry"
+              element={
+                <ProtectedRoute user={user} allowedRoles={["Teacher"]}>
+                  <MarksEntry user={user} setUser={setUser} />
+                </ProtectedRoute>
+              }
+            />
+
 
         {/* ================= PARENT ROUTES ================= */}
         <Route

@@ -8,6 +8,7 @@ import {
   BarChart3,
 } from "lucide-react";
 
+/* Animated Icon */
 const AnimatedBookIcon = () => (
   <svg
     viewBox="0 0 24 24"
@@ -22,32 +23,24 @@ const AnimatedBookIcon = () => (
   </svg>
 );
 
-
-
 const AdminDashboard = ({ user, setUser }) => {
   const today = new Date().toISOString().split("T")[0];
 
   const [selectedDate, setSelectedDate] = useState(today);
   const [attendance, setAttendance] = useState(94);
 
-  /* 🏫 SCHOOL NAME (DYNAMIC) */
+  /* SCHOOL NAME */
   const [schoolName, setSchoolName] = useState("SchoolLMS");
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("school-settings"));
-    if (data?.schoolName) {
-      setSchoolName(data.schoolName);
-    }
+    if (data?.schoolName) setSchoolName(data.schoolName);
   }, []);
 
-  // demo date-wise attendance logic
+  /* Attendance Logic */
   useEffect(() => {
-    if (selectedDate === today) {
-      setAttendance(94);
-    } else {
-      const random = 82 + Math.floor(Math.random() * 12); // 82–94
-      setAttendance(random);
-    }
+    if (selectedDate === today) setAttendance(94);
+    else setAttendance(82 + Math.floor(Math.random() * 12));
   }, [selectedDate, today]);
 
   const classAttendance = [
@@ -64,25 +57,26 @@ const AdminDashboard = ({ user, setUser }) => {
   });
 
   const [summary, setSummary] = useState({
-    present: 1168,
-    absent: 72,
-    circulars: 3,
+    present: 0,
+    absent: 0,
+    circulars: 0,
   });
 
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-  if (selectedDate === today) {
-    // TODAY DATA
+    const total = 1240;
+    const present = Math.round((attendance / 100) * total);
+
     setStats({
-      students: 1240,
-      teachers: 58,
+      students: total,
+      teachers: 56 + Math.floor(Math.random() * 3),
       classes: "LKG – 12",
     });
 
     setSummary({
-      present: Math.round((attendance / 100) * 1240),
-      absent: 1240 - Math.round((attendance / 100) * 1240),
+      present,
+      absent: total - present,
       circulars: 3,
     });
 
@@ -91,309 +85,177 @@ const AdminDashboard = ({ user, setUser }) => {
       { text: "📢 New circular published", time: "09:40 AM" },
       { text: "💰 Fees payment received (₹5,000)", time: "Yesterday" },
     ]);
-  } else {
-    // PAST DATE – RANDOMIZED
-    const total = 1240;
-    const present = Math.round((attendance / 100) * total);
-
-    setStats({
-      students: total,
-      teachers: 56 + Math.floor(Math.random() * 3), // 56–58
-      classes: "LKG – 12",
-    });
-
-    setSummary({
-      present,
-      absent: total - present,
-      circulars: 1 + Math.floor(Math.random() * 3), // 1–3
-    });
-
-    setActivities([
-      {
-        text: "📲 Attendance marked for Class 6-B",
-        time: "10:00 AM",
-      },
-      {
-        text: "📢 Circular sent to parents",
-        time: "09:20 AM",
-      },
-    ]);
-  }
-}, [selectedDate, attendance, today]);
-
-
+  }, [attendance]);
 
   return (
     <DashboardLayout user={user} setUser={setUser}>
-      {/* HEADER */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-textPrimary">
-            {schoolName} — Admin Dashboard
-          </h1>
-          <p className="text-sm text-textSecondary mt-1">
-            Overview of today’s school activity
-          </p>
-        </div>
+      {/* ================= HERO HEADER ================= */}
+      <div className="mb-10 p-6 rounded-3xl bg-gradient-to-r from-accent/10 to-transparent border border-cardBorder">
+        <h1 className="text-3xl font-bold text-textPrimary">
+          {schoolName} — Admin Dashboard
+        </h1>
+        <p className="text-textSecondary mt-1">
+          School Control Center Overview
+        </p>
 
-        <div className="mt-4 md:mt-0 flex items-center gap-3">
-          {/* DATE INPUT */}
-          <div
-            className="
-              flex items-center gap-2
-              bg-card border border-cardBorder
-              px-4 py-2 rounded-xl shadow
-            "
-          >
-            <span>📅</span>
-            <input
-              type="date"
-              value={selectedDate}
-              max={today}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="
-                bg-transparent outline-none
-                text-sm font-semibold
-                text-textPrimary
-              "
-            />
-          </div>
-
-          {/* QUICK ACTION */}
-          <button
-            onClick={() => setSelectedDate(today)}
-            className="
-              text-xs px-3 py-1 rounded-lg
-              bg-blue-100 dark:bg-blue-900
-              text-blue-700 dark:text-blue-300 font-semibold
-            "
-          >
-            Today
-          </button>
+        <div className="flex flex-wrap gap-3 mt-4 text-sm">
+          <span className="bg-success/10 text-success px-3 py-1 rounded-full">
+            Attendance {attendance}%
+          </span>
+          <span className="bg-info/10 text-info px-3 py-1 rounded-full">
+            {summary.circulars} Circulars Today
+          </span>
+          <span className="bg-warning/10 text-warning px-3 py-1 rounded-full">
+            Fees Pending
+          </span>
         </div>
       </div>
 
-      {/* QUICK ACTIONS */}
-  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-  {[
-    { label: "Mark Attendance", icon: "🧑" },
-    { label: "Add Student", icon: "➕" },
-    { label: "Send Circular", icon: "📢" },
-    { label: "Collect Fees", icon: "💰" },
-  ].map((item) => (
-    <button
-      key={item.label}
-      className="
-        bg-card border border-cardBorder
-        p-5 rounded-2xl shadow
-        hover:shadow-lg hover:-translate-y-0.5 transition
-        text-sm font-semibold
-        flex flex-col items-center gap-2
-        text-textPrimary
-      "
-    >
-      <span className="text-3xl text-textSecondary">
-        {item.icon}
-      </span>
-      {item.label}
-    </button>
-  ))}
-</div>
+      {/* ================= DATE SELECT ================= */}
+      <div className="flex justify-end mb-6">
+        <div className="flex items-center gap-2 bg-card border border-cardBorder px-4 py-2 rounded-xl shadow">
+          <span>📅</span>
+          <input
+            type="date"
+            value={selectedDate}
+            max={today}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="bg-transparent outline-none text-sm font-semibold text-textPrimary"
+          />
+        </div>
+      </div>
 
-      {/* PREMIUM STATS CARDS (LUCIDE – FINAL PREMIUM VERSION) */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-  {[
-    {
-      title: "Total Students",
-      value: stats.students,
-      icon: GraduationCap,
-      bg: "bg-blue-100 dark:bg-blue-900/30",
-      iconColor: "text-blue-600 dark:text-blue-300",
-    },
-    {
-      title: "Teachers",
-      value: stats.teachers,
-      icon: Users,
-      bg: "bg-green-100 dark:bg-green-900/30",
-      iconColor: "text-green-600 dark:text-green-300",
-    },
-    {
-      title: "Classes",
-      value: stats.classes,
-      icon: BookOpen, // fallback (SVG used instead)
-      bg: "bg-purple-100 dark:bg-purple-900/30",
-      iconColor: "text-purple-600 dark:text-purple-300",
-    },
-    {
-      title: "Attendance",
-      value: `${attendance}%`,
-      icon: BarChart3,
-      bg: "bg-orange-100 dark:bg-orange-900/30",
-      iconColor: "text-orange-600 dark:text-orange-300",
-    },
-  ].map((card) => {
-    const Icon = card.icon;
+      {/* ================= QUICK ACTIONS ================= */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        {[
+          { label: "Mark Attendance", icon: "🧑" },
+          { label: "Add Student", icon: "➕" },
+          { label: "Send Circular", icon: "📢" },
+          { label: "Collect Fees", icon: "💰" },
+        ].map((item) => (
+          <button
+            key={item.label}
+            className="bg-card border border-cardBorder p-5 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition flex flex-col items-center gap-2 text-sm font-semibold text-textPrimary"
+          >
+            <span className="text-3xl">{item.icon}</span>
+            {item.label}
+          </button>
+        ))}
+      </div>
 
-    return (
-      <motion.div
-        key={card.title}
-        whileHover={{ y: -4 }}
-        transition={{ type: "spring", stiffness: 300 }}
-        className="
-          bg-card border border-cardBorder
-          p-6 rounded-2xl shadow
-          hover:shadow-xl
-          transition-all duration-300
-          flex items-center justify-between
-        "
-      >
-        {/* LEFT */}
-        <div>
-          <p className="text-sm text-textSecondary">
-            {card.title}
-          </p>
-          <h2 className="text-3xl font-bold text-textPrimary mt-2">
-            {card.value}
-          </h2>
+      {/* ================= KPI CARDS ================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        {[
+          { title: "Total Students", value: stats.students, icon: GraduationCap },
+          { title: "Teachers", value: stats.teachers, icon: Users },
+          { title: "Classes", value: stats.classes, icon: BookOpen },
+          { title: "Attendance", value: `${attendance}%`, icon: BarChart3 },
+        ].map((card) => {
+          const Icon = card.icon;
+          return (
+            <motion.div
+              key={card.title}
+              whileHover={{ y: -6 }}
+              className="bg-card border border-cardBorder p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between"
+            >
+              <div>
+                <p className="text-xs uppercase tracking-wide text-textMuted">
+                  {card.title}
+                </p>
+                <h2 className="text-3xl font-extrabold text-textPrimary mt-1">
+                  {card.value}
+                </h2>
+                <p className="text-xs text-success mt-1">
+                  Updated today
+                </p>
+              </div>
+
+              {card.title === "Classes" ? (
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-purple-100 dark:bg-purple-900/30">
+                  <AnimatedBookIcon />
+                </div>
+              ) : (
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-accent/10">
+                  <Icon className="h-6 w-6 text-accent" />
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* ================= ATTENDANCE + FEES ================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow lg:col-span-2">
+          <h3 className="font-semibold text-textPrimary mb-4">
+            Overall Attendance
+          </h3>
+          <div className="flex justify-between text-sm text-textSecondary mb-2">
+            <span>{selectedDate === today ? "Today" : "Selected Date"}</span>
+            <span>{attendance}%</span>
+          </div>
+          <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3">
+            <div
+              className="bg-success h-3 rounded-full transition-all duration-500"
+              style={{ width: `${attendance}%` }}
+            />
+          </div>
         </div>
 
-        {/* ICON */}
-        {card.title === "Classes" ? (
-          <motion.div
-            whileHover={{ scale: 1.2, rotate: 6 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="bg-purple-100 dark:bg-purple-900/30 h-12 w-12 rounded-xl flex items-center justify-center"
-          >
-            <AnimatedBookIcon />
-          </motion.div>
-        ) : (
-          <motion.div
-            whileHover={{ scale: 1.2, rotate: 6 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className={`
-              ${card.bg}
-              h-12 w-12 rounded-xl
-              flex items-center justify-center
-            `}
-          >
-            <Icon className={`h-6 w-6 ${card.iconColor}`} />
-          </motion.div>
-        )}
-      </motion.div>
-    );
-  })}
-</div>
+        <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
+          <h3 className="font-semibold text-textPrimary mb-3">
+            Fees Status
+          </h3>
+          <p className="text-sm text-textSecondary">
+            Collected: ₹12,00,000
+          </p>
+          <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3 mt-2">
+            <div className="bg-warning h-3 rounded-full w-[80%]" />
+          </div>
+          <p className="text-sm text-danger mt-2">
+            Pending: ₹3,00,000
+          </p>
+        </div>
+      </div>
 
+      {/* ================= TODAY SUMMARY ================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+        <div className="bg-navbar border-l-4 border-success p-5 rounded-xl shadow">
+          <p className="text-sm text-textSecondary">Students Present</p>
+          <h2 className="text-3xl font-semibold">{summary.present}</h2>
+        </div>
+        <div className="bg-navbar border-l-4 border-danger p-5 rounded-xl shadow">
+          <p className="text-sm text-textSecondary">Students Absent</p>
+          <h2 className="text-3xl font-semibold">{summary.absent}</h2>
+        </div>
+        <div className="bg-navbar border-l-4 border-info p-5 rounded-xl shadow">
+          <p className="text-sm text-textSecondary">Circulars Sent</p>
+          <h2 className="text-3xl font-semibold">{summary.circulars}</h2>
+        </div>
+      </div>
 
-      {/* GRID SECTION */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-  {/* OVERALL ATTENDANCE */}
-  <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow lg:col-span-2">
-    <h3 className="font-semibold text-textPrimary mb-4">
-      Overall Attendance
-    </h3>
+      {/* ================= RECENT ACTIVITIES ================= */}
+      <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-10">
+        <h3 className="font-semibold text-textPrimary mb-4">
+          Recent Activities
+        </h3>
 
-    <div className="flex justify-between text-sm mb-2 text-textSecondary">
-      <span>{selectedDate === today ? "Today" : "Selected Date"}</span>
-      <span>{attendance}%</span>
-    </div>
+        <div className="relative border-l border-borderDefault pl-6 space-y-4">
+          {activities.map((item, i) => (
+            <div key={i} className="relative">
+              <span className="absolute -left-[9px] top-1 h-4 w-4 bg-accent rounded-full" />
+              <p className="text-sm text-textPrimary font-medium">
+                {item.text}
+              </p>
+              <p className="text-xs text-textMuted">
+                {item.time}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-    <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3">
-      <div
-        className="bg-green-500 h-3 rounded-full transition-all duration-500"
-        style={{ width: `${attendance}%` }}
-      />
-    </div>
-
-    <p className="text-xs text-textSecondary mt-2">
-      Attendance based on selected date
-    </p>
-  </div>
-
-  {/* FEES */}
-  <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
-    <h3 className="font-semibold text-textPrimary mb-3">
-      Fees Status
-    </h3>
-
-    <p className="text-sm text-textSecondary">
-      Collected: ₹12,00,000
-    </p>
-
-    <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3 mt-2">
-      <div className="bg-yellow-500 h-3 rounded-full w-[80%]" />
-    </div>
-
-    <p className="text-sm text-red-500 mt-2">
-      Pending: ₹3,00,000
-    </p>
-  </div>
-</div>
-
-{/* RECENT ACTIVITIES */}
-<div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-10">
-  <h3 className="font-semibold text-textPrimary mb-4">
-    Recent Activities
-  </h3>
-
-  <ul className="space-y-3 text-sm text-textSecondary">
-    {activities.map((item, i) => (
-      <li key={i} className="flex justify-between">
-        <span>{item.text}</span>
-        <span className="text-textSecondary">
-          {item.time}
-        </span>
-      </li>
-    ))}
-  </ul>
-</div>
-
-{/* TODAY SUMMARY */}
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-
-  {/* PRESENT */}
-  <div className="bg-navbar text-textPrimary border-l-4 border-green-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-textSecondary">
-      Students Present
-    </p>
-    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
-      {summary.present}
-    </h2>
-    <p className="text-xs text-green-600 mt-1">
-      Marked today
-    </p>
-  </div>
-
-  {/* ABSENT */}
-  <div className="bg-navbar text-textPrimary border-l-4 border-red-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-textSecondary">
-      Students Absent
-    </p>
-    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
-      {summary.absent}
-    </h2>
-    <p className="text-xs text-red-600 mt-1">
-      Not present
-    </p>
-  </div>
-
-  {/* CIRCULARS */}
-  <div className="bg-navbar text-textPrimary border-l-4 border-blue-500 p-5 rounded-xl shadow-sm hover:shadow-md transition">
-    <p className="text-sm text-textSecondary">
-      Circulars Sent
-    </p>
-    <h2 className="text-3xl font-semibold text-textPrimary mt-2">
-      {summary.circulars}
-    </h2>
-    <p className="text-xs text-blue-600 mt-1">
-      Today
-    </p>
-  </div>
-
-</div>
-
-
-      {/* CLASS-WISE ATTENDANCE */}
+      {/* ================= CLASS-WISE ATTENDANCE ================= */}
       <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow">
         <h3 className="font-semibold text-textPrimary mb-4">
           Class-wise Attendance
@@ -407,7 +269,7 @@ const AdminDashboard = ({ user, setUser }) => {
             </div>
             <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
               <div
-                className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                className="bg-info h-2 rounded-full transition-all duration-500"
                 style={{ width: `${percent}%` }}
               />
             </div>
