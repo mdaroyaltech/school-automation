@@ -9,19 +9,20 @@ const Attendance = ({ user, setUser }) => {
 
   const key = `attendance-${className}-${section}`;
 
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem(key));
-    if (saved) {
-      setStudents(saved);
-    } else {
-      const list =
-        studentsData[`${className}-${section}`]?.map((name) => ({
-          name,
-          present: true,
-        })) || [];
-      setStudents(list);
-    }
-  }, [className, section]);
+useEffect(() => {
+  const saved = JSON.parse(localStorage.getItem(key)) || [];
+
+  const masterList =
+    studentsData[`${className}-${section}`]?.map((name) => {
+      const existing = saved.find((s) => s.name === name);
+      return existing
+        ? existing
+        : { name, present: true };
+    }) || [];
+
+  setStudents(masterList);
+}, [className, section]);
+
 
   const toggle = (index) => {
     const updated = [...students];
@@ -157,8 +158,7 @@ const Attendance = ({ user, setUser }) => {
           className="bg-accent hover:bg-accent-hover
             text-white px-8 py-3 rounded-xl
             font-semibold shadow transition"
-        >a
-          Save Attendance
+        >Save Attendance
         </button>
       </div>
     </DashboardLayout>
