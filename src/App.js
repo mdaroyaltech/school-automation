@@ -14,6 +14,7 @@ import Students from "./pages/Students";
 import MarksEntry from "./pages/MarksEntry";
 import Settings from "./pages/Settings";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import AssignTeachers from "./pages/AssignTeachers";
 
 function App() {
   const [user, setUser] = useState(null); // { role, email }
@@ -39,6 +40,15 @@ function App() {
           element={
             <ProtectedRoute user={user} allowedRoles={["Admin"]}>
               <Fees user={user} setUser={setUser} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/assign-teachers"
+          element={
+            <ProtectedRoute user={user} allowedRoles={["Admin"]}>
+              <AssignTeachers user={user} setUser={setUser} />
             </ProtectedRoute>
           }
         />

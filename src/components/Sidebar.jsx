@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Users,
+  UserPlus,
+  ClipboardCheck,
   IndianRupee,
   FileText,
   Bell,
@@ -40,7 +42,8 @@ const MENUS = {
   /* ========== ADMIN ========== */
   Admin: [
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
-    { icon: Users, label: "Attendance", path: "/attendance" },
+    { icon: ClipboardCheck, label: "Attendance", path: "/attendance" },
+    { icon: UserPlus, label: "Assign Teachers", path: "/assign-teachers" },
     { icon: IndianRupee, label: "Fees", path: "/fees" },
     { icon: FileText, label: "Reports", path: "/reports" },
     { icon: Bell, label: "Circulars", path: "/circular" },

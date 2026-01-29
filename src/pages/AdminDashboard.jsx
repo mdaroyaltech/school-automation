@@ -87,6 +87,25 @@ const AdminDashboard = ({ user, setUser }) => {
     ]);
   }, [attendance]);
 
+  /* ================= REAL TODAY SUMMARY (FROM LOCALSTORAGE) ================= */
+useEffect(() => {
+  const data =
+    JSON.parse(localStorage.getItem("attendance-5-A")) || [];
+
+  const present = data.filter((s) => s.present).length;
+  const absent = data.length - present;
+
+  const circulars =
+    JSON.parse(localStorage.getItem("admin-circulars"))?.length || 3;
+
+  setSummary({
+    present,
+    absent,
+    circulars,
+  });
+}, []);
+
+
   return (
     <DashboardLayout user={user} setUser={setUser}>
       {/* ================= HERO HEADER ================= */}
@@ -219,20 +238,67 @@ const AdminDashboard = ({ user, setUser }) => {
       </div>
 
       {/* ================= TODAY SUMMARY ================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-        <div className="bg-navbar border-l-4 border-success p-5 rounded-xl shadow">
-          <p className="text-sm text-textSecondary">Students Present</p>
-          <h2 className="text-3xl font-semibold">{summary.present}</h2>
-        </div>
-        <div className="bg-navbar border-l-4 border-danger p-5 rounded-xl shadow">
-          <p className="text-sm text-textSecondary">Students Absent</p>
-          <h2 className="text-3xl font-semibold">{summary.absent}</h2>
-        </div>
-        <div className="bg-navbar border-l-4 border-info p-5 rounded-xl shadow">
-          <p className="text-sm text-textSecondary">Circulars Sent</p>
-          <h2 className="text-3xl font-semibold">{summary.circulars}</h2>
-        </div>
-      </div>
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+
+  {/* PRESENT */}
+  <div className="
+    bg-card border border-cardBorder p-6 rounded-2xl shadow
+    hover:shadow-lg transition
+  ">
+    <div className="flex items-center justify-between">
+      <p className="text-sm text-textSecondary">Students Present</p>
+      <span className="text-2xl">✅</span>
+    </div>
+
+    <h2 className="text-3xl font-bold text-success mt-2">
+      {summary.present}
+    </h2>
+
+    <p className="text-xs text-textMuted mt-1">
+      Attendance marked today
+    </p>
+  </div>
+
+  {/* ABSENT */}
+  <div className="
+    bg-card border border-cardBorder p-6 rounded-2xl shadow
+    hover:shadow-lg transition
+  ">
+    <div className="flex items-center justify-between">
+      <p className="text-sm text-textSecondary">Students Absent</p>
+      <span className="text-2xl">❌</span>
+    </div>
+
+    <h2 className="text-3xl font-bold text-danger mt-2">
+      {summary.absent}
+    </h2>
+
+    <p className="text-xs text-textMuted mt-1">
+      Parents notified automatically
+    </p>
+  </div>
+
+  {/* CIRCULARS */}
+  <div className="
+    bg-card border border-cardBorder p-6 rounded-2xl shadow
+    hover:shadow-lg transition
+  ">
+    <div className="flex items-center justify-between">
+      <p className="text-sm text-textSecondary">Circulars Sent</p>
+      <span className="text-2xl">📢</span>
+    </div>
+
+    <h2 className="text-3xl font-bold text-info mt-2">
+      {summary.circulars}
+    </h2>
+
+    <p className="text-xs text-textMuted mt-1">
+      Published by admin
+    </p>
+  </div>
+
+</div>
+
 
       {/* ================= RECENT ACTIVITIES ================= */}
       <div className="bg-card border border-cardBorder p-6 rounded-2xl shadow mb-10">
