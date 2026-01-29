@@ -88,47 +88,93 @@ const AdminDashboard = ({ user, setUser }) => {
   }, [attendance]);
 
   /* ================= REAL TODAY SUMMARY (FROM LOCALSTORAGE) ================= */
-useEffect(() => {
-  const data =
-    JSON.parse(localStorage.getItem("attendance-5-A")) || [];
+    useEffect(() => {
+      const data =
+        JSON.parse(localStorage.getItem("attendance-5-A")) || [];
 
-  const present = data.filter((s) => s.present).length;
-  const absent = data.length - present;
+      const present = data.filter((s) => s.present).length;
+      const absent = data.length - present;
 
-  const circulars =
-    JSON.parse(localStorage.getItem("admin-circulars"))?.length || 3;
+      const circulars =
+        JSON.parse(localStorage.getItem("admin-circulars"))?.length || 3;
 
-  setSummary({
-    present,
-    absent,
-    circulars,
-  });
-}, []);
+      setSummary({
+        present,
+        absent,
+        circulars,
+      });
+    }, []);
 
 
   return (
     <DashboardLayout user={user} setUser={setUser}>
-      {/* ================= HERO HEADER ================= */}
-      <div className="mb-10 p-6 rounded-3xl bg-gradient-to-r from-accent/10 to-transparent border border-cardBorder">
-        <h1 className="text-3xl font-bold text-textPrimary">
-          {schoolName} — Admin Dashboard
-        </h1>
-        <p className="text-textSecondary mt-1">
-          School Control Center Overview
-        </p>
+     {/* ================= HERO HEADER ================= */}
+<div
+  className="mb-10 rounded-3xl p-6 md:p-8 shadow"
+  style={{
+    background:
+      "linear-gradient(135deg, var(--bg-card), var(--bg-page))",
+    border: "1px solid var(--border-card)",
+  }}
+>
+  {/* TOP ROW */}
+  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h1 className="text-3xl font-bold text-[color:var(--text-primary)]">
+        {schoolName}
+      </h1>
+      <p className="text-sm mt-1 text-[color:var(--text-secondary)]">
+        Admin Dashboard · School Control Center
+      </p>
+    </div>
 
-        <div className="flex flex-wrap gap-3 mt-4 text-sm">
-          <span className="bg-success/10 text-success px-3 py-1 rounded-full">
-            Attendance {attendance}%
-          </span>
-          <span className="bg-info/10 text-info px-3 py-1 rounded-full">
-            {summary.circulars} Circulars Today
-          </span>
-          <span className="bg-warning/10 text-warning px-3 py-1 rounded-full">
-            Fees Pending
-          </span>
-        </div>
-      </div>
+    {/* QUICK STATUS */}
+    <div
+      className="px-4 py-2 rounded-2xl text-sm font-semibold"
+      style={{
+        background: "var(--bg-page)",
+        color: "var(--text-primary)",
+        border: "1px solid var(--border-default)",
+      }}
+    >
+      📅 Today · Attendance {attendance}%
+    </div>
+  </div>
+
+  {/* STATS PILLS */}
+  <div className="flex flex-wrap gap-3 mt-6">
+    <span
+      className="px-4 py-2 rounded-full text-sm font-semibold"
+      style={{
+        background: "rgba(34,197,94,0.12)",
+        color: "var(--success)",
+      }}
+    >
+      ✅ Attendance {attendance}%
+    </span>
+
+    <span
+      className="px-4 py-2 rounded-full text-sm font-semibold"
+      style={{
+        background: "rgba(56,189,248,0.12)",
+        color: "var(--info)",
+      }}
+    >
+      📢 {summary.circulars} Circulars Today
+    </span>
+
+    <span
+      className="px-4 py-2 rounded-full text-sm font-semibold"
+      style={{
+        background: "rgba(251,191,36,0.15)",
+        color: "var(--warning)",
+      }}
+    >
+      💰 Fees Pending
+    </span>
+  </div>
+</div>
+
 
       {/* ================= DATE SELECT ================= */}
       <div className="flex justify-end mb-6">
