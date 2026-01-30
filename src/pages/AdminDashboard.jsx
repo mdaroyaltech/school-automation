@@ -209,45 +209,73 @@ const AdminDashboard = ({ user, setUser }) => {
       </div>
 
       {/* ================= KPI CARDS ================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        {[
-          { title: "Total Students", value: stats.students, icon: GraduationCap },
-          { title: "Teachers", value: stats.teachers, icon: Users },
-          { title: "Classes", value: stats.classes, icon: BookOpen },
-          { title: "Attendance", value: `${attendance}%`, icon: BarChart3 },
-        ].map((card) => {
-          const Icon = card.icon;
-          return (
-            <motion.div
-              key={card.title}
-              whileHover={{ y: -6 }}
-              className="bg-card border border-cardBorder p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between"
-            >
-              <div>
-                <p className="text-xs uppercase tracking-wide text-textMuted">
-                  {card.title}
-                </p>
-                <h2 className="text-3xl font-extrabold text-textPrimary mt-1">
-                  {card.value}
-                </h2>
-                <p className="text-xs text-success mt-1">
-                  Updated today
-                </p>
-              </div>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+  {[
+    { title: "Total Students", value: stats.students, icon: GraduationCap },
+    { title: "Teachers", value: stats.teachers, icon: Users },
+    { title: "Classes", value: stats.classes, icon: BookOpen },
+    { title: "Attendance", value: `${attendance}%`, icon: BarChart3 },
+  ].map((card) => {
+    const Icon = card.icon;
 
-              {card.title === "Classes" ? (
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-purple-100 dark:bg-purple-900/30">
-                  <AnimatedBookIcon />
-                </div>
-              ) : (
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-accent/10">
-                  <Icon className="h-6 w-6 text-accent" />
-                </div>
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
+    return (
+      <motion.div
+        key={card.title}
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 250 }}
+        className="
+          bg-card border border-cardBorder
+          p-6 rounded-2xl shadow
+          hover:shadow-xl transition
+          flex items-center justify-between
+          group
+        "
+      >
+        {/* LEFT CONTENT */}
+        <div>
+          <p className="text-xs uppercase tracking-wide text-textMuted">
+            {card.title}
+          </p>
+
+          <h2 className="text-3xl font-extrabold text-textPrimary mt-1">
+            {card.value}
+          </h2>
+
+          <p className="text-xs text-success mt-1">
+            Updated today
+          </p>
+        </div>
+
+        {/* RIGHT ICON */}
+        {card.title === "Classes" ? (
+          <motion.div
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="
+              h-12 w-12 rounded-xl
+              flex items-center justify-center
+              bg-purple-100 dark:bg-purple-900/30
+            "
+          >
+            <AnimatedBookIcon />
+          </motion.div>
+        ) : (
+          <motion.div
+            whileHover={{ scale: 1.15, rotate: 6 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="
+              h-12 w-12 rounded-xl
+              flex items-center justify-center
+              bg-accent/10
+            "
+          >
+            <Icon className="h-6 w-6 text-accent" />
+          </motion.div>
+        )}
+      </motion.div>
+    );
+  })}
+</div>
 
       {/* ================= ATTENDANCE + FEES ================= */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
