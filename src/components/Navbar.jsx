@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Bell, Moon, Sun, UserCircle } from "lucide-react";
+import {
+  Bell,
+  Moon,
+  Sun,
+  UserCircle,
+  Menu
+} from "lucide-react";
+
 
 const Navbar = ({ user, onMobileMenu = () => {} }) => {
   const [showNotif, setShowNotif] = useState(false);
@@ -51,57 +58,117 @@ const Navbar = ({ user, onMobileMenu = () => {} }) => {
   return (
     <>
       {/* ================= MOBILE NAVBAR ================= */}
-      <div
+<div
+  className="
+    md:hidden fixed top-0 left-0 right-0 z-50 h-14
+    bg-navbar border-b border-borderDefault
+    flex items-center justify-between px-3
+  "
+>
+  {/* ☰ MOBILE SIDEBAR */}
+  <button
+    onClick={onMobileMenu}
+    className="
+      p-2 rounded-lg
+      hover:bg-gray-100 dark:hover:bg-slate-800
+      text-textPrimary
+    "
+  >
+    <span className="text-xl font-bold">☰</span>
+  </button>
+
+  {/* LOGO + SCHOOL NAME */}
+  <div className="flex items-center gap-2 truncate">
+    {logo && (
+      <img
+        src={logo}
+        alt="School Logo"
+        className="h-6 object-contain"
+      />
+    )}
+    <span className="text-sm font-semibold text-textPrimary truncate">
+      {schoolName}
+    </span>
+  </div>
+
+  {/* RIGHT ICONS (SAME AS DESKTOP STYLE) */}
+  <div className="flex items-center gap-1">
+    {/* DARK MODE */}
+    <button
+      onClick={() => setDark(!dark)}
+      className="
+        p-2 rounded-lg
+        hover:bg-gray-100 dark:hover:bg-slate-800
+      "
+    >
+      {dark ? (
+        <Sun size={18} className="text-yellow-400" />
+      ) : (
+        <Moon size={18} className="text-textPrimary" />
+      )}
+    </button>
+
+    {/* NOTIFICATION */}
+    <div ref={notifRef} className="relative">
+      <button
+        onClick={() => setShowNotif(!showNotif)}
         className="
-          md:hidden fixed top-0 left-0 right-0 z-50 h-14
-          bg-navbar text-textPrimary
-          border-b border-borderDefault
-          flex items-center justify-between px-4
+          relative p-2 rounded-lg
+          hover:bg-gray-100 dark:hover:bg-slate-800
         "
       >
-        {/* ☰ MOBILE SIDEBAR */}
-        <button
-          onClick={onMobileMenu}
-          className="
-            p-2 rounded-lg
-            hover:bg-gray-100 dark:hover:bg-slate-800
-            text-textPrimary
-          "
-        >
-          ☰
-        </button>
+        <Bell size={18} className="text-textPrimary" />
+        <span className="absolute top-1 right-1 h-2 w-2 bg-danger rounded-full" />
+      </button>
 
-        {/* LOGO (CENTER) */}
-        <div className="flex items-center gap-2">
-          {logo && (
-            <img
-              src={logo}
-              alt="School Logo"
-              className="h-7 object-contain"
-            />
-          )}
-          <span className="text-sm font-semibold">
-            {schoolName}
-          </span>
+      {showNotif && (
+        <div className="
+          absolute right-0 mt-2 w-64
+          bg-navbar border border-borderDefault
+          rounded-xl shadow-lg p-4 text-sm
+        ">
+          <p className="font-semibold mb-2 text-textPrimary">
+            Notifications
+          </p>
+          <ul className="space-y-2 text-textSecondary">
+            <li>New circular published</li>
+            <li>Attendance alert</li>
+            <li>Fees payment received</li>
+          </ul>
         </div>
+      )}
+    </div>
 
-        {/* RIGHT ICONS */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setDark(!dark)}
-            className="
-              p-2 rounded-lg
-              hover:bg-gray-100 dark:hover:bg-slate-800
-            "
-          >
-            {dark ? (
-              <Sun size={18} className="text-yellow-400" />
-            ) : (
-              <Moon size={18} />
-            )}
-          </button>
+    {/* PROFILE */}
+    <div ref={profileRef} className="relative">
+      <button
+        onClick={() => setShowProfile(!showProfile)}
+        className="
+          p-2 rounded-lg
+          hover:bg-gray-100 dark:hover:bg-slate-800
+        "
+      >
+        <UserCircle size={20} className="text-textPrimary" />
+      </button>
+
+      {showProfile && (
+        <div className="
+          absolute right-0 mt-2 w-48
+          bg-navbar border border-borderDefault
+          rounded-xl shadow-lg p-4 text-sm
+        ">
+          <p className="font-semibold text-textPrimary">
+            {user?.email || "demo@school.com"}
+          </p>
+          <p className="text-textSecondary mt-1">
+            Role: {user?.role}
+          </p>
         </div>
-      </div>
+      )}
+    </div>
+  </div>
+</div>
+
 
       {/* ================= DESKTOP NAVBAR ================= */}
       <div
