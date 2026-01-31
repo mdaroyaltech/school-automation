@@ -20,10 +20,8 @@ const DashboardLayout = ({ user, setUser, children }) => {
 
       {/* ================= MAIN AREA ================= */}
       <div
-        className={`
-          flex-1 flex flex-col transition-all
-          ml-0
-          md:ml-[${collapsed ? "84px" : "260px"}]
+        className={`flex-1 flex flex-col transition-all
+          ${collapsed ? "md:ml-20" : "md:ml-64"}
         `}
       >
         {/* ================= NAVBAR ================= */}
