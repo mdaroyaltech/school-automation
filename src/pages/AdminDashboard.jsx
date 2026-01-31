@@ -128,17 +128,25 @@ const AdminDashboard = ({ user, setUser }) => {
       </p>
     </div>
 
-    {/* QUICK STATUS */}
-    <div
-      className="px-4 py-2 rounded-2xl text-sm font-semibold"
-      style={{
-        background: "var(--bg-page)",
-        color: "var(--text-primary)",
-        border: "1px solid var(--border-default)",
-      }}
-    >
-      📅 Today · Attendance {attendance}%
-    </div>
+{/* QUICK STATUS */}
+<div
+  className="px-4 py-2 rounded-2xl text-sm font-semibold"
+  style={{
+    background: "var(--bg-page)",
+    color: "var(--text-primary)",
+    border: "1px solid var(--border-default)",
+  }}
+>
+  📅{" "}
+  {selectedDate === today
+    ? "Today"
+    : new Date(selectedDate).toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })}{" "}
+  · Attendance {attendance}%
+</div>
   </div>
 
   {/* STATS PILLS */}
@@ -177,7 +185,8 @@ const AdminDashboard = ({ user, setUser }) => {
 
 
       {/* ================= DATE SELECT ================= */}
-      <div className="flex justify-end mb-6">
+      <div className="flex justify-end mb-6 gap-2">
+        {/* DATE PICKER */}
         <div className="flex items-center gap-2 bg-card border border-cardBorder px-4 py-2 rounded-xl shadow">
           <span>📅</span>
           <input
@@ -188,6 +197,19 @@ const AdminDashboard = ({ user, setUser }) => {
             className="bg-transparent outline-none text-sm font-semibold text-textPrimary"
           />
         </div>
+
+        {/* TODAY BUTTON */}
+        <button
+          onClick={() => setSelectedDate(today)}
+          className="
+            px-4 py-2 rounded-xl text-sm font-semibold
+            bg-accent text-white
+            hover:bg-accent-hover
+            shadow
+          "
+        >
+          Today
+        </button>
       </div>
 
       {/* ================= QUICK ACTIONS ================= */}
